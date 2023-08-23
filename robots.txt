@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://cs4630-uva.github.io/sitemap.xml
+Sitemap: https://archit31uniyal.github.io/sitemap.xml
