@@ -4,15 +4,13 @@ title: Home
 permalink: /
 subtitle:
 
-# profile:
-#   align: right
-#   image: prof_pic.jpg
-#   image_circular: false # crops the image to make it circular
-#   address: >
-#     <p>E-mail: hassan@virginia.edu</p>
-#     <p>Office: Rice Hall, Room 522</p>
-#     <p>Office hours: Wednesdays 11AM-Noon and by appointment</p>
-    
+profile:
+  align: right
+  image: prof_pic.jpg
+  image_circular: false # crops the image to make it circular
+  address: >
+    <p>E-mail: a.uniyal@virginia.edu</p>
+    <p>Office: Rice Hall, Room 336</p>
 
 news: false  # includes a list of news items
 latest_posts: false  # includes a list of the newest posts
