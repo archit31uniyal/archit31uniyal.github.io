@@ -2,7 +2,7 @@
 layout: about
 title: Home
 permalink: /
-subtitle: Personal website
+subtitle:
 
 # profile:
 #   align: right
