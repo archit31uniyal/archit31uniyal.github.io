@@ -25,7 +25,7 @@ I am a computer science PhD student at University of Virginia, Charlottesville, 
 
 My current research interests include memorization in large language models, privacy leakage due to compression in machine learning models and differential privacy. I am open to collaborations, so feel free to email me if you have a cool idea and want to discuss it.
 
-<div class="row row-cols-2 projects pt-3 pb-3">
+<div class="row row-cols-3 projects pt-3 pb-3">
   {% include people_horizontal.html name="Archit Uniyal" email="a.uniyal@virginia.edu" office="Rice Hall 336" img="/assets/img/prof_pic.jpg" %}
 
 </div>
