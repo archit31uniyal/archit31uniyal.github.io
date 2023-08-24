@@ -19,13 +19,22 @@
     abstract = "Large language models are shown to present privacy risks through memorization of training data, andseveral recent works have studied such risks for the pre-training phase. Little attention, however, has been given to the fine-tuning phase and it is not well understood how different fine-tuning methods (such as fine-tuning the full model, the model head, and adapter) compare in terms of memorization risk. This presents increasing concern as the {``}pre-train and fine-tune{''} paradigm proliferates. In this paper, we empirically study memorization of fine-tuning methods using membership inference and extraction attacks, and show that their susceptibility to attacks is very different. We observe that fine-tuning the head of the model has the highest susceptibility to attacks, whereas fine-tuning smaller adapters appears to be less vulnerable to known extraction attacks.",
 }
 
-@misc{mireshghallah2022quantifying,
-      title={Quantifying Privacy Risks of Masked Language Models Using Membership Inference Attacks}, 
-      author={Fatemehsadat Mireshghallah and Kartik Goyal and Archit Uniyal and Taylor Berg-Kirkpatrick and Reza Shokri},
-      year={2022},
-      eprint={2203.03929},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@inproceedings{mireshghallah-etal-2022-quantifying,
+    title = "Quantifying Privacy Risks of Masked Language Models Using Membership Inference Attacks",
+    author = "Mireshghallah, Fatemehsadat  and
+      Goyal, Kartik  and
+      Uniyal, Archit  and
+      Berg-Kirkpatrick, Taylor  and
+      Shokri, Reza",
+    booktitle = "Proceedings of the 2022 Conference on Empirical Methods in Natural Language Processing",
+    month = dec,
+    year = "2022",
+    address = "Abu Dhabi, United Arab Emirates",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2022.emnlp-main.570",
+    doi = "10.18653/v1/2022.emnlp-main.570",
+    pages = "8332--8347",
+    abstract = "The wide adoption and application of Masked language models (MLMs) on sensitive data (from legal to medical) necessitates a thorough quantitative investigation into their privacy vulnerabilities. Prior attempts at measuring leakage of MLMs via membership inference attacks have been inconclusive, implying potential robustness of MLMs to privacy attacks.In this work, we posit that prior attempts were inconclusive because they based their attack solely on the MLM{'}s model score. We devise a stronger membership inference attack based on likelihood ratio hypothesis testing that involves an additional reference MLM to more accurately quantify the privacy risks of memorization in MLMs. We show that masked language models are indeed susceptible to likelihood ratio membership inference attacks: Our empirical results, on models trained on medical notes, show that our attack improves the AUC of prior membership inference attacks from 0.66 to an alarmingly high 0.90 level.",
 }
 
 @misc{uniyal2022dpsgd,
