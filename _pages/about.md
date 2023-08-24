@@ -9,7 +9,6 @@ profile:
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
   address: >
-    <p>E-mail: a.uniyal@virginia.edu<br></p>
     <p>Office:<br>Room 336, Rice Hall <br> 85 Engineer's Way, Charlottesville, VA 22903</p>
 
 news: false  # includes a list of news items
