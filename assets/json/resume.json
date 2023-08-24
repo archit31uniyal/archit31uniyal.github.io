@@ -36,8 +36,8 @@
       "name": "Oracle Labs, USA",
       "position": "Research Intern",
       "url": "https://labs.oracle.com/pls/apex/r/labs/labs/intro",
-      "startDate": "May 2023",
-      "endDate": "August 2023",
+      "startDate": "May-2023",
+      "endDate": "Aug-2023",
       "summary": "Research on privacy in LLMs",
       "highlights": [
         "Privacy",
@@ -48,7 +48,7 @@
       "name": "Samsung Research Institute, Noida, India",
       "position": "Research Intern",
       "url": "https://research.samsung.com/sri-n",
-      "startDate": "January 2022",
+      "startDate": "Jan-2022",
       "endDate": "June 2022",
       "summary": "Worked on generative models like GANs for image enhancement.\\n Worked on improving and automating the cycling detection algorithm in Samsung galaxy watches",
       "highlights": [
@@ -57,10 +57,10 @@
     },
     {
       "name": "Openmined",
-      "position": "Research Intern",
+      "position": "Researcher",
       "url": "https://www.openmined.org",
-      "startDate": "June 2021",
-      "endDate": "August 2021",
+      "startDate": "Nov-2020",
+      "endDate": "Present",
       "summary": "Conducted research on the disparate impact of DP-SGD and PATE on minority groups in the dataset.\\n Conducted research on wide neural networks and how they are able to perform better than deep neural net- works under specific conditions like differential privacy.",
       "highlights": [
         "Generative Models"
