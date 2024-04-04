@@ -1,7 +1,7 @@
 {
   "basics": {
     "name": "Archit Uniyal",
-    "label": "PhD Student",
+    "label": "Masters Student",
     "image": "",
     "email": "a.uniyal@virginia.edu"
   },
@@ -11,9 +11,9 @@
       "institution": "University of Virginia, Charlottesville, VA",
       "url": "https://engineering.virginia.edu/departments/computer-science",
       "area": "Computer Science",
-      "studyType": "PhD",
+      "studyType": "Masters",
       "startDate": "2022",
-      "endDate": "Present",
+      "endDate": "2024",
       "score": "",
       "courses": [
         "Privacy in large language models",
@@ -56,7 +56,7 @@
       "position": "Researcher",
       "url": "https://www.openmined.org",
       "startDate": "Nov 2020",
-      "endDate": "Present",
+      "endDate": "July 2022",
       "summary": "",
       "highlights": [
         "Conducted research on the disparate impact of DP-SGD and PATE on minority groups in the dataset.", 
