@@ -11,9 +11,9 @@
 - title: Education
   type: time_table
   contents:
-    - title: PhD in Computer Science
+    - title: Masters in Computer Science
       institution: University of Virginia, Charlottesville, VA
-      year: 2022 - Present
+      year: 2022 - 2024
       description:
         - Conducting research on privacy in large language models, inference attacks on machine learning models and differential privacy
     - title: Bachelors in Engineering (B.E)
