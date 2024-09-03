@@ -1,4 +1,38 @@
-# Automated Unit testing
+---
+layout: post
+title: Automated Unit testing
+date: 2024-09-03
+description: Internship work at OmniVision Technologies
+tags: automated testing
+featured: true
+
+authors:
+  - name: Archit Uniyal
+  
+# bibliography: 2018-12-22-distill.bib
+
+# Optionally, you can add a table of contents to your post.
+# NOTES:
+#   - make sure that TOC names match the actual section names
+#     for hyperlinks within the post to work correctly.
+#   - we may want to automate TOC generation in the future using
+#     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
+toc:
+  - name: What is uni testing?
+  - name: Randomized Testing
+  - name: Concolic Testing
+    subsections:
+      - name: Background
+        subsections:
+        - name: Direct Automated Random Testing (DART)
+        - name: CREST - Concolic test generation tool for C
+  - name: Depth First Search (DFS) Approach
+  - name: Resources
+    subsections:
+      - name: pycparser
+      - name: Z3 Solver 
+  - name: References
+---
 
 In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code as well as the approach I developed during my internship at OmniVision Technologies. 
 
@@ -129,7 +163,7 @@ function DART(program, initial_input):
 
 The function DART(...) highlights the core of the algorithm. The algorithm takes random inputs along with the program as arguments, which are later used to generate the execution trace and the path constraints encountered. The execution trace is stored to keep tracks of paths covered. The path constraints are then traveresed to explore different branches in the program by negating each path constraint one at a time. The new path constraints are solved using an SMT solver. If the conditions are satisfied, record the new inputs and new constraints. Lastly, after each condition has been traversed, return the explored paths which can be used calculate the code coverage. The paper can be found [here](https://dl.acm.org/doi/10.1145/1064978.1065036).
 
-##### CREST: Concolic test generation tool for C
+##### CREST - Concolic test generation tool for C
 
 CREST ([Burnim, 2008](#references)) builds on top of the concept of concolic testing by introducing several heuristic search strategies aimed at improving the effectiveness and scalibility of concolic testing for large software programs. For detailed information on crest, you can visit their website [here](https://www.burn.im/crest/).
 
