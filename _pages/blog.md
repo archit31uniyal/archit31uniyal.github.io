@@ -190,7 +190,7 @@ pagination:
   </ul>
 
 {% if page.pagination.enabled %}
-<!-- {% include pagination.liquid %} -->
+{% include page.pagination.liquid %}
 {% endif %}
 
 </div>
