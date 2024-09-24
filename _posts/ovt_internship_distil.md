@@ -8,8 +8,6 @@ featured: true
 
 authors:
   - name: Archit Uniyal
-  
-# bibliography: 2018-12-22-distill.bib
 
 # Optionally, you can add a table of contents to your post.
 # NOTES:
