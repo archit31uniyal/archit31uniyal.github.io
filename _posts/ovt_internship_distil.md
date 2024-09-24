@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Automated Unit testing
 date: 2024-09-03
 description: Internship work at OmniVision Technologies
@@ -16,7 +16,7 @@ authors:
 #   - we may want to automate TOC generation in the future using
 #     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
 toc:
-  - name: What is uni testing?
+  - name: What is unit testing?
   - name: Randomized Testing
   - name: Concolic Testing
     subsections:
