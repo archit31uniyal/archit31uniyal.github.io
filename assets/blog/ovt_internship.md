@@ -76,11 +76,11 @@ Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It 
 As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $x=x_0, y=y_0$ and $z=2*y$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
 $$(2*y_0 == x_0) \land (x_0 > y_0 + 10)$$
 
-In order to solve the constraint aboce, an SMT solver can be used which would return values for $x_0$ and $y_0$ which would satisfy the constraint.
+In order to solve the constraint above, an SMT solver can be used which would return values for $x_0$ and $y_0$ which would satisfy the constraint.
 
 #### Background
 
-In this section, I will be discussing two concolic testing techniques which I studied and implemented as part of my internship. These two algorithm have been adopted by the community and work has been done make these approaches more efficient.
+In this section, I will be discussing two concolic testing techniques which I studied and implemented as part of my internship. These two algorithm have been adopted by the community and prior work has been done to make these approaches more efficient.
 
 ##### Direct Automated Random Testing (DART)
 
