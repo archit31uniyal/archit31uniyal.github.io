@@ -1,10 +1,10 @@
 ---
 layout: default
 title: Automated Unit testing
-date: 2024-09-03
+date: 2024-10-18
 description: Internship work at OmniVision Technologies
 tags: automated testing
-featured: true
+featured: false
 
 authors:
   - name: Archit Uniyal
@@ -52,29 +52,29 @@ In the following sections, we will be discussing two most commonly used unit tes
 
 Randomized testing involves testing a program iteratively using random, independent inputs. The example below shows a simple absolute function which takes in as input an integer and returns its absolute value.
 
-```python
+{% highlight python %}
 def abs(x: int):
   if x > 0:
     return x
   else:
     return x # Bug: should be '-x'
-```
+{% endhighlight %}
 
 Let's assume, the random input generator generates {18, 31, 3, 21, -15}. '-15' is the only input which will trigger the bug.
 
-```python
+{% highlight python %}
 def testAbs(n: int):
   for i in range(n):
     x = random.randint(-1000, 1000)
     result = abs(x)
     assert(result >= 0)
-```
+{% endhighlight %}
 
 A naive randomized unit test generation technique which I explored during my internship included extracting the arguments and their datatypes. The datatype of each argument was used to set a range of values from which a random value would be generated for the corresponding argument.
 
 Provided below is an example of a target function
 
-```c
+{% highlight c %}
 int execute(int a, int b){
     if (a>20){
         if (b < 15){
@@ -84,8 +84,8 @@ int execute(int a, int b){
     else
         return -1;
     }
-}
-```
+{% endhighlight %}
+
 For the example, above the algorithm would fetch the arguments for function using its abstract syntax tree (AST). Here since both arguments are integers, therefore the random values for *a* and *b* would be generated within the range \[-2<sup>32</sup>, 2<sup>32</sup>\). The GOAL condition would be achieved for all *a>20* and *b<15*.
 
 Randomized testing leads to generation of similar data and increases time required to generate useful unit tests. An alternative to randomized testing is concolic testing which has shown to be more effective in generating unit tests. Recently, large language models (LLM) have also been utilized to efficiently generate unit tests.
@@ -126,7 +126,7 @@ DART ([Godefroid, 2005](#references)) is a software testing algorithm which auto
 
 The pseudo code below provides a systematic explanation of how the algorithm functions.
 
-```pseudo
+{% highlight pseudo %}
 function DART(program, initial_input):
     # Initialize with initial random input
     input_queue = [initial_input]
@@ -159,7 +159,7 @@ function DART(program, initial_input):
                 explored_paths.add(new_constraints)
 
     return explored_paths
-```
+{% endhighlight %}
 
 The function DART(...) highlights the core of the algorithm. The algorithm takes random inputs along with the program as arguments, which are later used to generate the execution trace and the path constraints encountered. The execution trace is stored to keep tracks of paths covered. The path constraints are then traveresed to explore different branches in the program by negating each path constraint one at a time. The new path constraints are solved using an SMT solver. If the conditions are satisfied, record the new inputs and new constraints. Lastly, after each condition has been traversed, return the explored paths which can be used calculate the code coverage. The paper can be found [here](https://dl.acm.org/doi/10.1145/1064978.1065036).
 
@@ -190,7 +190,7 @@ The three main strategies in this work are as follows:
     
     **Pseudo Code**
 
-    ```pseudo
+    {% highlight pseudo %}
     function CfgDirectedSearch(program P, initial_path p):
         # Continue searching until the termination condition is met
         while not termination_condition():
@@ -215,7 +215,7 @@ The three main strategies in this work are as follows:
 
         # Return the set of branches that have been covered by the search
         return covered_branches
-    ```
+    {% endhighlight %}
   
 2. **Uniform Random Search**
 
@@ -230,7 +230,7 @@ The three main strategies in this work are as follows:
   
     **Pseudo Code**
 
-    ```pseudo
+    {% highlight pseudo %}
     function UniformRandomSearch(program P, path p):
         # Initialize the position in the current execution path
         i = 0
@@ -258,7 +258,8 @@ The three main strategies in this work are as follows:
 
         # Return the final execution path after the search
         return p
-    ```
+    {% endhighlight %}
+
 3. **Random Branch Search**
 
     A simpler, more practical approach that randomly selects a branch to force at each iteration, focusing on exploration rather than uniformity.
@@ -271,7 +272,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-    ```pseudo
+    {% highlight pseudo %}
     function RandomBranchSearch(program P, path p):
         # Continue searching until the termination condition is met
         while not termination_condition():
@@ -293,7 +294,7 @@ The three main strategies in this work are as follows:
 
         # Return the set of branches that have been covered by the search
         return covered_branches
-    ```
+    {% endhighlight %}
 
 Originally, crest was implemented with Yices SMT solver which does not support non-linear operations. Later on, Heechul implemented crest with Z3 solver to enable non-linear operations. The implementation of crest-z3 can be found [here](https://github.com/heechul/crest-z3).
 
@@ -311,7 +312,7 @@ The DFS-based approach can be divided into three key stages:
     In this stage, the conditions in the tree are traversed and converted to the desired SMT format. Additionally, the variables in the symbolic expression are converted to only include the arguments to the target function, if possible. An example of this process is shown below.
 
     For a given target function *execute*,
-    ```c
+    {% highlight c %}
     int execute(int a, int b, int d){
         int c  = a + b;
         if (c<20){
@@ -323,7 +324,7 @@ The DFS-based approach can be divided into three key stages:
         else
             return c*d;
     }
-    ``` 
+    {% endhighlight %} 
 
     [Figure 3](#fig3) below shows how the binary tree generated for the function *execute* will look. In this binary tree *c* will be replaced with '$a+b$', which will convert the conditionals to '$a+b<20$' and '$a+b<500$'.
 
@@ -338,7 +339,7 @@ The DFS-based approach can be divided into three key stages:
    
    In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
-    ```pseudo
+    {% highlight pseudo %}
     function DFS(node, SMT_solver):
         # If the node is empty, return since there's no condition to process
         if not node.value:
@@ -369,8 +370,8 @@ The DFS-based approach can be divided into three key stages:
 
         # Return the generated test inputs and the set of visited paths for coverage analysis
         return test_inputs, visited
-
-    ```
+    {% endhighlight %}
+    
     When DFS(...) is invoked on the tree in [fig. 3](#fig3), it will encounter two conditionals: $a+b<20$ and $a+b<500$.
 
     - **Initial Path:** The first condition encountered is $a+b<20$. This path is passed to the SMT solver, which might return $a = 0$ and $b = 0$ as solutions satisfying the constraint.
@@ -410,18 +411,19 @@ We can perform this preprocessing using pycparser's ```parse_file``` function. I
 
 Alternatives for ```cpp``` are also available such as ```gcc``` and ```clang``` using the ```-E``` flag. An example on how to use ```parse_file``` is provided below.
 
-```python
+{% highlight python %}
 from pycparser import parse_file
 
 ast = parse_file(filename, use_cpp=True,
             cpp_path='gcc',
             cpp_args=['-E', r'-Iutils/fake_libc_include'])
-```
+{% endhighlight %}
+
 ```filename``` refers to the path to the C program. The code above will help in attaining the abstract syntax tree (AST) of the C code. The next step is to traverse the AST.
 
 For instance, the C code under consideration is as follows.
 
-```C
+{% highlight C %}
 int main() {
     int x = 10;
     if (x > 5) {
@@ -432,11 +434,11 @@ int main() {
     }
     return x;
 }
-```
+{% endhighlight %}
 
 The following code will help traverse the AST for if conditions.
 
-```python
+{% highlight python %}
 from pycparser import parse_file, c_ast
 
 ast = parse_file(filename, use_cpp=True,
@@ -455,11 +457,11 @@ def find_if_conditions(node, indent=0):
         find_if_conditions(child, indent + 2)
 
 find_if_conditions(ast)
-```
+{% endhighlight %}
 
 The output will look something like this
 
-```mathematica
+{% highlight mathematica %}
 If condition found at <c_code>:5:5:
   Condition:
     BinaryOp (>)
@@ -470,13 +472,13 @@ If condition found at <c_code>:9:5:
     BinaryOp (<)
       ID: x
       Constant: int, 20
-```
+{% endhighlight %}
 
 The output can then be converted into SMT format to be processed by a solver using z3-solver python binding which will be discussed in the next section.
 
 Since we can now extract the if statements, we can build our binary tree accordingly by assigning conditions in the ```iftrue``` block in the AST to the left node and the conditions in the ```iffalse``` block in the AST to the right node.
 
-```python
+{% highlight python %}
 class BinaryTreeNode:
     def __init__(self, value=None, left=None, right=None):
         self.value = value
@@ -498,11 +500,11 @@ def handle_if(node):
     if_true = convert2binary(node.iftrue)
     if_false = convert2binary(node.iffalse)
     return BinaryTreeNode(cond, if_true, if_false)
-```
+{% endhighlight %}
 
 The complete code will look as follows:
 
-```python
+{% highlight python %}
 from pycparser import parse_file, c_ast
 
 ast = parse_file(filename, use_cpp=True,
@@ -534,7 +536,7 @@ def handle_if(node):
 
 convert2binary(ast)
 print(tree)
-```
+{% endhighlight %}
 
 #### Z3 Solver
 
@@ -547,7 +549,7 @@ Z3 can be installed in python using the following command:
 
 Converting a binary operation to Z3 format expression
 
-```python
+{% highlight python %}
 from z3 import *
 from pycparser import c_ast
 
@@ -590,7 +592,7 @@ def convert_to_z3_format(cond):
             raise Exception(f"Unsupported constant type: {cond.type}")
     else:
         raise Exception(f"Unsupported condition: {type(cond)}")
-```
+{% endhighlight %}
 
 The function ```convert_to_z3_format``` takes as input a condition extraction from the AST as shown in the previous section and converts it to a format which can be solved using the Z3 solver.
 
@@ -629,7 +631,7 @@ In this subsection, I will be discussing on solving symbolic expression using th
 
 Provided below is a simple example on how z3 solver can be used to attain inputs.
 
-```python
+{% highlight python %}
 from z3 import *
 
 def solve_constraints(conds):
@@ -649,7 +651,7 @@ def solve_constraints(conds):
 x, y, z = Real('x y z')
 conds = [x > 1, y > 1, x + y > 3, z - x < 10]
 solved_values = solve_constraints(conds)
-```
+{% endhighlight %}
 
 Through this tutorial we have learnt how to parse C code using pycparser, convert the conditions to Z3 compatible format and solve them using Z3 solver. 
 

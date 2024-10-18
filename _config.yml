@@ -313,8 +313,8 @@ jekyll-archives:
 # -----------------------------------------------------------------------------
 
 scholar:
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Uniyal]
+  first_name: [Archit]
 
   style: apa
   locale: en
