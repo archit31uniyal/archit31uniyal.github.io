@@ -39,10 +39,11 @@ In this blog, we will be discussing automated unit testing, various techniques u
 ### What is unit testing?
 Unit testing is the process of fragmenting the code into smaller functional units and performing individual tests on these units. Unit testing has become a crucial part of the software testing lifecycle. It enables developers to identify bugs, logical flaws as well as decipher inputs which increase code coverage.
 
-<figure align="center" id="fig1">
+<!-- <figure align="center" id="fig1">
     <img src="../assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" width=600 alt="STLC">
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
-</figure>
+</figure> -->
+{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" %}
 
 [Figure 1](#fig1) highlights the various stages of software testing life cycle (STLC). The first four steps of STLC: test plan, analysis, design, development, require a lot of manual work as well as time to implement. Automated unit testing targets these four steps to reduce the time taken in generating these tests as well as to develop tests with higher code coverage.
 
@@ -102,10 +103,11 @@ SMT solvers such as [yices](#references) and [z3](#references) are used in the s
 
 Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
 
-<figure align="center" id="fig2">
+<!-- <figure align="center" id="fig2">
     <img src="../assets/img/Concolic+Testing+Approach.jpg" width=600 alt="Concolic testing">
     <figcaption>Figure 2. Concolic testing</figcaption>
-</figure>
+</figure> -->
+{% include figure.liquid loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" %}
 
 As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $x=x_0, y=y_0$ and $z=2*y$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
 $$(2*y_0 == x_0) \land (x_0 > y_0 + 10)$$
@@ -328,10 +330,11 @@ The DFS-based approach can be divided into three key stages:
 
     [Figure 3](#fig3) below shows how the binary tree generated for the function *execute* will look. In this binary tree *c* will be replaced with '$a+b$', which will convert the conditionals to '$a+b<20$' and '$a+b<500$'.
 
-    <figure align="center" id="fig3">
+    <!-- <figure align="center" id="fig3">
         <img src="../assets/img/BST.png" width=600 alt="Concolic testing">
         <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
-    </figure>   
+    </figure>    -->
+    {% include figure.liquid loading="eager" path="assets/img/BST.jpg" class="img-fluid rounded z-depth-1" %}
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
 
