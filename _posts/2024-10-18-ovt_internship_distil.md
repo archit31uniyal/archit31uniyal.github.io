@@ -32,6 +32,8 @@ toc:
   - name: References
 ---
 
+## Automated Unit Testing
+
 In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code as well as the approach I developed during my internship at OmniVision Technologies. 
 
 ### What is unit testing?
