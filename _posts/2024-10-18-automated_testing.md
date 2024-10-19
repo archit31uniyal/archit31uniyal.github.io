@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Automated Unit testing
 date: 2024-10-18
 description: Internship work at OmniVision Technologies
@@ -33,7 +33,7 @@ bibliography: 2024-10-18-automated_testing.bib
 #   - name: References
 
 toc:
-    beginning: true
+    sidebar: "left"
 ---
 
 In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code as well as the approach I developed during my internship at OmniVision Technologies.
