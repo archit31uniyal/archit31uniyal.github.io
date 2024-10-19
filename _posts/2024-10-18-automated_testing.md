@@ -47,7 +47,7 @@ Unit testing is the process of fragmenting the code into smaller functional unit
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
 </figure> -->
 
-{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" img_url: '600x500' %}
 
 [Figure 1](#fig1) highlights the various stages of software testing life cycle (STLC). The first four steps of STLC: test plan, analysis, design, development, require a lot of manual work as well as time to implement. Automated unit testing targets these four steps to reduce the time taken in generating these tests as well as to develop tests with higher code coverage.
 
