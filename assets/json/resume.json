@@ -15,11 +15,7 @@
       "startDate": "2022",
       "endDate": "2024",
       "score": "",
-      "courses": [
-        "Privacy in large language models",
-        "Inference attacks in machine learning models",
-        "Differential Privacy"
-      ]
+      "courses": ["Privacy in large language models", "Inference attacks in machine learning models", "Differential Privacy"]
     },
     {
       "institution": "UIET, Panjab University, Chandigarh, India",
@@ -47,9 +43,10 @@
       "startDate": "Jan 2022",
       "endDate": "June 2022",
       "summary": "",
-      "highlights": ["Worked on generative models like GANs for image enhancement.", 
-      "Worked on improving and automating the cycling detection algorithm in Samsung galaxy watches"
-    ]
+      "highlights": [
+        "Worked on generative models like GANs for image enhancement.",
+        "Worked on improving and automating the cycling detection algorithm in Samsung galaxy watches"
+      ]
     },
     {
       "name": "Openmined",
@@ -59,7 +56,7 @@
       "endDate": "July 2022",
       "summary": "",
       "highlights": [
-        "Conducted research on the disparate impact of DP-SGD and PATE on minority groups in the dataset.", 
+        "Conducted research on the disparate impact of DP-SGD and PATE on minority groups in the dataset.",
         "Conducted research on wide neural networks and how they are able to perform better than deep neural net- works under specific conditions like differential privacy."
       ]
     }

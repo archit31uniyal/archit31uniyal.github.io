@@ -18,6 +18,6 @@ social: true # includes social icons at the bottom of the page
 
 I am a computer science master's student at the University of Virginia, Charlottesville, USA, graduating in December 2024.
 
-My current interests include large language models, privacy in machine learning models and differential privacy. I am open to collaborations, so feel free to email me if you have a cool idea and want to discuss it. 
+My current interests include large language models, privacy in machine learning models and differential privacy. I am open to collaborations, so feel free to email me if you have a cool idea and want to discuss it.
 
 Currently, I am actively looking for full-time positions in data science and machine learning.
