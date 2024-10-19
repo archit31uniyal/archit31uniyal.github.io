@@ -59,20 +59,20 @@ Randomized testing involves testing a program iteratively using random, independ
 
 {% highlight python %}
 def abs(x: int):
-if x > 0:
-return x
-else:
-return x # Bug: should be '-x'
+    if x > 0:
+        return x
+    else:
+        return x # Bug: should be '-x'
 {% endhighlight %}
 
 Let's assume, the random input generator generates {18, 31, 3, 21, -15}. '-15' is the only input which will trigger the bug.
 
 {% highlight python %}
 def testAbs(n: int):
-for i in range(n):
-x = random.randint(-1000, 1000)
-result = abs(x)
-assert(result >= 0)
+    for i in range(n):
+        x = random.randint(-1000, 1000)
+        result = abs(x)
+        assert(result >= 0)
 {% endhighlight %}
 
 A naive randomized unit test generation technique which I explored during my internship included extracting the arguments and their datatypes. The datatype of each argument was used to set a range of values from which a random value would be generated for the corresponding argument.
@@ -81,13 +81,13 @@ Provided below is an example of a target function
 
 {% highlight C %}
 int execute(int a, int b){
-if (a>20){
-if (b < 15){
-printf("GOAL!");
-return a-b;
-}
-else
-return -1;
+    if (a>20){
+        if (b < 15){
+            printf("GOAL!");
+            return a-b;
+        }
+    else
+        return -1;
 }
 {% endhighlight %}
 
@@ -97,7 +97,7 @@ Randomized testing leads to generation of similar data and increases time requir
 
 ### Concolic Testing
 
-Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code <d-cite key="10.1145/1321631.1321746" [Sen, 2007]></d-cite>.
+Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code <d-cite key="10.1145/1321631.1321746"></d-cite>.
 
 <!-- ([Sen, 2007](#references)).  -->
 
@@ -142,8 +142,8 @@ The pseudo code below provides a systematic explanation of how the algorithm fun
 
 {% highlight pseudo %}
 function DART(program, initial_input): # Initialize with initial random input
-input_queue = [initial_input]
-explored_paths = set()
+    input_queue = [initial_input]
+    explored_paths = set()
 
     while input_queue is not empty:
         # Fetch the next input to test
@@ -208,7 +208,7 @@ The three main strategies in this work are as follows:
 
     {% highlight pseudo %}
     function CfgDirectedSearch(program P, initial_path p): # Continue searching until the termination condition is met
-    while not termination_condition():
+        while not termination_condition():
 
             # Select the branch from the current path that has the shortest distance to any uncovered branch
             branch_to_force = select_branch_with_min_distance_to_uncovered(p)
@@ -248,7 +248,7 @@ The three main strategies in this work are as follows:
 
     {% highlight pseudo %}
     function UniformRandomSearch(program P, path p): # Initialize the position in the current execution path
-    i = 0
+        i = 0
 
         # Continue until the termination condition is met
         while not termination_condition():
@@ -290,7 +290,7 @@ The three main strategies in this work are as follows:
 
     {% highlight pseudo %}
     function RandomBranchSearch(program P, path p): # Continue searching until the termination condition is met
-    while not termination_condition():
+        while not termination_condition():
 
             # Randomly select a branch from the current execution path
             random_branch = select_random_branch(p)
@@ -331,15 +331,15 @@ The DFS-based approach can be divided into three key stages:
 
     {% highlight C %}
     int execute(int a, int b, int d){
-    int c = a + b;
-    if (c<20){
-    return -1;
-    }
-    else if (c<500){
-    return c%d;
-    }
-    else
-    return c\*d;
+        int c = a + b;
+        if (c<20){
+            return -1;
+        }
+        else if (c<500){
+            return c%d;
+        }
+        else
+            return c\*d;
     }
     {% endhighlight %}
 
@@ -350,7 +350,7 @@ The DFS-based approach can be divided into three key stages:
         <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
     </figure>    -->
 
-    {% include figure.liquid path="assets/img/BST.jpg" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" %}
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
 
@@ -359,35 +359,36 @@ The DFS-based approach can be divided into three key stages:
     In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
     {% highlight pseudo %}
-    function DFS(node, SMT_solver): # If the node is empty, return since there's no condition to process
-    if not node.value:
-    return
+    function DFS(node, SMT_solver): 
+        # If the node is empty, return since there's no condition to process
+        if not node.value:
+            return
 
-         # Add the current condition to the path and mark it as visited
-         path.append(node.value)
-         visited.add(node.value)
+        # Add the current condition to the path and mark it as visited
+        path.append(node.value)
+        visited.add(node.value)
 
-         # Traverse the true (left) branch if it exists
-         if node.left:
-             DFS(node.left, SMT_solver)
-             # Solve the path using the SMT solver and store the resulting test inputs
-             test_inputs.append(SMT_solver.solve(path))
+        # Traverse the true (left) branch if it exists
+        if node.left:
+            DFS(node.left, SMT_solver)
+            # Solve the path using the SMT solver and store the resulting test inputs
+            test_inputs.append(SMT_solver.solve(path))
 
-         # Negate the last condition to explore the false (right) branch
-         path[-1] = Negate(path[-1])
+        # Negate the last condition to explore the false (right) branch
+        path[-1] = Negate(path[-1])
 
-         # Traverse the false (right) branch if it exists
-         if node.right:
-             DFS(node.right, SMT_solver)
-             # Solve the path using the SMT solver and store the resulting test inputs
-             test_inputs.append(SMT_solver.solve(path))
+        # Traverse the false (right) branch if it exists
+        if node.right:
+            DFS(node.right, SMT_solver)
+            # Solve the path using the SMT solver and store the resulting test inputs
+            test_inputs.append(SMT_solver.solve(path))
 
-         # After exploring both branches, solve the path with all conditions negated
-         path[-1] = Negate(path[-1])
-         test_inputs.append(SMT_solver.solve(path))
+        # After exploring both branches, solve the path with all conditions negated
+        path[-1] = Negate(path[-1])
+        test_inputs.append(SMT_solver.solve(path))
 
-         # Return the generated test inputs and the set of visited paths for coverage analysis
-         return test_inputs, visited
+        # Return the generated test inputs and the set of visited paths for coverage analysis
+        return test_inputs, visited
 
     {% endhighlight %}
 
@@ -434,8 +435,8 @@ Alternatives for `cpp` are also available such as `gcc` and `clang` using the `-
 from pycparser import parse_file
 
 ast = parse_file(filename, use_cpp=True,
-cpp_path='gcc',
-cpp_args=['-E', r'-Iutils/fake_libc_include'])
+            cpp_path='gcc',
+            cpp_args=['-E', r'-Iutils/fake_libc_include'])
 {% endhighlight %}
 
 `filename` refers to the path to the C program. The code above will help in attaining the abstract syntax tree (AST) of the C code. The next step is to traverse the AST.
@@ -444,53 +445,53 @@ For instance, the C code under consideration is as follows.
 
 {% highlight C %}
 int main() {
-int x = 10;
-if (x > 5) {
-x = x + 1;
-}
-if (x < 20) {
-x = x - 1;
-}
-return x;
+    int x = 10;
+    if (x > 5) {
+        x = x + 1;
+    }
+    if (x < 20) {
+        x = x - 1;
+    }
+    return x;
 }
 {% endhighlight %}
 
 The following code will help traverse the AST for if conditions.
 
 {% highlight python %}
-from pycparser import parse_file, c_ast
+    from pycparser import parse_file, c_ast
 
-ast = parse_file(filename, use_cpp=True,
-cpp_path='gcc',
-cpp_args=['-E', r'-Iutils/fake_libc_include'])
+    ast = parse_file(filename, use_cpp=True,
+                cpp_path='gcc',
+                cpp_args=['-E', r'-Iutils/fake_libc_include'])
 
-# Function to recursively traverse the AST and find if conditions
+    # Function to recursively traverse the AST and find if conditions
+    def find_if_conditions(node, indent=0):
+        if isinstance(node, c_ast.If):
+            # Print the condition of the if statement
+            print(' ' * indent + f"If condition found: {node.cond.coord}")
+            print(' ' * indent + f"Condition: {node.cond}")
 
-def find*if_conditions(node, indent=0):
-if isinstance(node, c_ast.If): # Print the condition of the if statement
-print(' ' * indent + f"If condition found: {node.cond.coord}")
-print(' ' \_ indent + f"Condition: {node.cond}")
+        # Recursively traverse child nodes
+        for child in node:
+            find_if_conditions(child, indent + 2)
 
-    # Recursively traverse child nodes
-    for child in node:
-        find_if_conditions(child, indent + 2)
-
-find_if_conditions(ast)
+    find_if_conditions(ast)
 {% endhighlight %}
 
 The output will look something like this
 
 {% highlight mathematica %}
 If condition found at <c_code>:5:5:
-Condition:
-BinaryOp (>)
-ID: x
-Constant: int, 5
+  Condition:
+    BinaryOp (>)
+      ID: x
+      Constant: int, 5
 If condition found at <c_code>:9:5:
-Condition:
-BinaryOp (<)
-ID: x
-Constant: int, 20
+  Condition:
+    BinaryOp (<)
+      ID: x
+      Constant: int, 20
 {% endhighlight %}
 
 The output can then be converted into SMT format to be processed by a solver using z3-solver python binding which will be discussed in the next section.
@@ -498,61 +499,63 @@ The output can then be converted into SMT format to be processed by a solver usi
 Since we can now extract the if statements, we can build our binary tree accordingly by assigning conditions in the `iftrue` block in the AST to the left node and the conditions in the `iffalse` block in the AST to the right node.
 
 {% highlight python %}
-class BinaryTreeNode:
-def **init**(self, value=None, left=None, right=None):
-self.value = value
-self.left = left
-self.right = right
+    class BinaryTreeNode:
+        def __init__(self, value=None, left=None, right=None):
+            self.value = value
+            self.left = left
+            self.right = right
 
-tree = []
-def convert2binary(node):
-if isinstance(node, c_ast.If): # call binary node creator function
-return handle_if(node)
+    tree = []
+    def convert2binary(node):
+        if isinstance(node, c_ast.If):
+            # call binary node creator function
+            return handle_if(node)
 
-    # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
-    for child in node:
-        tree.append(convert2binary(child))
+        # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
+        for child in node:
+            tree.append(convert2binary(child))
 
-def handle_if(node):
-cond = node.cond
-if_true = convert2binary(node.iftrue)
-if_false = convert2binary(node.iffalse)
-return BinaryTreeNode(cond, if_true, if_false)
+    def handle_if(node):
+        cond = node.cond
+        if_true = convert2binary(node.iftrue)
+        if_false = convert2binary(node.iffalse)
+        return BinaryTreeNode(cond, if_true, if_false)
 {% endhighlight %}
 
 The complete code will look as follows:
 
 {% highlight python %}
-from pycparser import parse_file, c_ast
+    from pycparser import parse_file, c_ast
 
-ast = parse_file(filename, use_cpp=True,
-cpp_path='gcc',
-cpp_args=['-E', r'-Iutils/fake_libc_include'])
+    ast = parse_file(filename, use_cpp=True,
+                cpp_path='gcc',
+                cpp_args=['-E', r'-Iutils/fake_libc_include'])
 
-class BinaryTreeNode:
-def **init**(self, value=None, left=None, right=None):
-self.value = value
-self.left = left
-self.right = right
+    class BinaryTreeNode:
+        def __init__(self, value=None, left=None, right=None):
+            self.value = value
+            self.left = left
+            self.right = right
 
-tree = []
+    tree = []
 
-def convert2binary(node):
-if isinstance(node, c_ast.If): # call binary node creator function
-return handle_if(node)
+    def convert2binary(node):
+        if isinstance(node, c_ast.If):
+            # call binary node creator function
+            return handle_if(node)
 
-    # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
-    for child in node:
-        tree.append(convert2binary(child))
+        # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
+        for child in node:
+            tree.append(convert2binary(child))
 
-def handle_if(node):
-cond = node.cond
-if_true = convert2binary(node.iftrue)
-if_false = convert2binary(node.iffalse)
-return BinaryTreeNode(cond, if_true, if_false)
+    def handle_if(node):
+        cond = node.cond
+        if_true = convert2binary(node.iftrue)
+        if_false = convert2binary(node.iffalse)
+        return BinaryTreeNode(cond, if_true, if_false)
 
-convert2binary(ast)
-print(tree)
+    convert2binary(ast)
+    print(tree)
 {% endhighlight %}
 
 #### Z3 Solver
@@ -568,49 +571,48 @@ Z3 can be installed in python using the following command:
 Converting a binary operation to Z3 format expression
 
 {% highlight python %}
-from z3 import \*
-from pycparser import c_ast
+    from z3 import *
+    from pycparser import c_ast
 
-def convert_to_z3_format(cond):
-if isinstance(cond, c_ast.BinaryOp):
-left = convert_to_z3_format(cond.left)
-right = convert_to_z3_format(cond.right)
+    def convert_to_z3_format(cond):
+        if isinstance(cond, c_ast.BinaryOp):
+            left = convert_to_z3_format(cond.left)
+            right = convert_to_z3_format(cond.right)
 
-        if cond.op == '==':
-            return left == right
-        elif cond.op == '!=':
-            return left != right
-        elif cond.op == '<':
-            return left < right
-        elif cond.op == '>':
-            return left > right
-        elif cond.op == '<=':
-            return left <= right
-        elif cond.op == '>=':
-            return left >= right
-        elif cond.op == '&&':
-            return And(left, right)
-        elif cond.op == '||':
-            return Or(left, right)
-        elif cond.op == '+':
-            return left + right
-        elif cond.op == '-':
-            return left - right
-        elif cond.op == '*':
-            return left * right
-        elif cond.op == '/':
-            return left / right
+            if cond.op == '==':
+                return left == right
+            elif cond.op == '!=':
+                return left != right
+            elif cond.op == '<':
+                return left < right
+            elif cond.op == '>':
+                return left > right
+            elif cond.op == '<=':
+                return left <= right
+            elif cond.op == '>=':
+                return left >= right
+            elif cond.op == '&&':
+                return And(left, right)
+            elif cond.op == '||':
+                return Or(left, right)
+            elif cond.op == '+':
+                return left + right
+            elif cond.op == '-':
+                return left - right
+            elif cond.op == '*':
+                return left * right
+            elif cond.op == '/':
+                return left / right
 
-    elif isinstance(cond, c_ast.ID):
-        return Int(cond.name)
-    elif isinstance(cond, c_ast.Constant):
-        if cond.type == 'int':
-            return IntVal(int(cond.value))
+        elif isinstance(cond, c_ast.ID):
+            return Int(cond.name)
+        elif isinstance(cond, c_ast.Constant):
+            if cond.type == 'int':
+                return IntVal(int(cond.value))
+            else:
+                raise Exception(f"Unsupported constant type: {cond.type}")
         else:
-            raise Exception(f"Unsupported constant type: {cond.type}")
-    else:
-        raise Exception(f"Unsupported condition: {type(cond)}")
-
+            raise Exception(f"Unsupported condition: {type(cond)}")
 {% endhighlight %}
 
 The function `convert_to_z3_format` takes as input a condition extraction from the AST as shown in the previous section and converts it to a format which can be solved using the Z3 solver.
@@ -653,25 +655,25 @@ In this subsection, I will be discussing on solving symbolic expression using th
 Provided below is a simple example on how z3 solver can be used to attain inputs.
 
 {% highlight python %}
-from z3 import \*
+    from z3 import *
 
-def solve_constraints(conds):
-solver = Solver()
-for cond in conds:
-solver.add(cond)
+    def solve_constraints(conds):
+        solver = Solver()
+        for cond in conds:
+            solver.add(cond)
 
-    if solver.check():
-        model = solver.model
-        print ("traversing model...")
-        # print the variables and their values required to solve the constraints
-        for d in m.decls():
-            print ("%s = %s" % (d.name(), m[d]))
+        if solver.check():
+            model = solver.model
+            print ("traversing model...")
+            # print the variables and their values required to solve the constraints
+            for d in m.decls():
+                print ("%s = %s" % (d.name(), m[d]))
 
-    return model
+        return model
 
-x, y, z = Real('x y z')
-conds = [x > 1, y > 1, x + y > 3, z - x < 10]
-solved_values = solve_constraints(conds)
+    x, y, z = Real('x y z')
+    conds = [x > 1, y > 1, x + y > 3, z - x < 10]
+    solved_values = solve_constraints(conds)
 {% endhighlight %}
 
 Through this tutorial we have learnt how to parse C code using pycparser, convert the conditions to Z3 compatible format and solve them using Z3 solver.
