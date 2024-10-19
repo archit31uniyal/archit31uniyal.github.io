@@ -31,7 +31,7 @@ toc:
       - name: Z3 Solver
   - name: References
 
-bibliography: ../assets/bibliography/2024-10-18-automated_testing.bib
+bibliography: 2024-10-18-automated_testing.bib
 ---
 
 ## Automated Unit Testing
@@ -119,10 +119,10 @@ Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It 
 
 {% include figure.liquid loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" %}
 
-As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $x=x_0, y=y_0$ and $z=2*y$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
+As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $$ x=x_0, y=y_0$ and $z=2*y $$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
 $$(2*y_0 == x_0) \land (x_0 > y_0 + 10)$$
 
-In order to solve the constraint above, an SMT solver can be used which would return values for $x_0$ and $y_0$ which would satisfy the constraint.
+In order to solve the constraint above, an SMT solver can be used which would return values for $$x_0$$ and $$y_0$$ which would satisfy the constraint.
 
 #### Background
 
@@ -339,11 +339,11 @@ The DFS-based approach can be divided into three key stages:
             return c%d;
         }
         else
-            return c\*d;
+            return c*d;
     }
     {% endhighlight %}
 
-    [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$a+b$', which will convert the conditionals to '$a+b<20$' and '$a+b<500$'.
+    [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
 
     <!-- <figure align="center" id="fig3">
         <img src="../assets/img/BST.png" width=600 alt="Concolic testing">
