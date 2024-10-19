@@ -47,7 +47,7 @@ Unit testing is the process of fragmenting the code into smaller functional unit
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
 </figure> -->
 
-{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" width=600 alt="STLC" caption="Figure 1. Software Testing Life Cycle" %}
+{% include figure.liquid id="fig1" loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" width=800 alt="STLC" caption="Figure 1. Software Testing Life Cycle" %}
 
 [Figure 1](#fig1) highlights the various stages of software testing life cycle (STLC). The first four steps of STLC: test plan, analysis, design, development, require a lot of manual work as well as time to implement. Automated unit testing targets these four steps to reduce the time taken in generating these tests as well as to develop tests with higher code coverage.
 
@@ -117,7 +117,7 @@ Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It 
     <figcaption>Figure 2. Concolic testing</figcaption>
 </figure> -->
 
-{% include figure.liquid loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid id="fig2" loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" width=800 alt="Concolic testing" caption="Figure 2. Concolic testing" %}
 
 As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $$ x=x_0, y=y_0$ and $z=2*y $$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
 $$(2*y_0 == x_0) \land (x_0 > y_0 + 10)$$
@@ -140,7 +140,7 @@ DART <d-cite key="10.1145/1064978.1065036"></d-cite> is a software testing algor
 
 The pseudo code below provides a systematic explanation of how the algorithm functions.
 
-    {% highlight pseudo %}
+    ```pseudo
     function DART(program, initial_input): # Initialize with initial random input
         input_queue = [initial_input]
         explored_paths = set()
@@ -173,7 +173,7 @@ The pseudo code below provides a systematic explanation of how the algorithm fun
 
         return explored_paths
 
-    {% endhighlight %}
+    ```
 
 The function DART(...) highlights the core of the algorithm. The algorithm takes random inputs along with the program as arguments, which are later used to generate the execution trace and the path constraints encountered. The execution trace is stored to keep tracks of paths covered. The path constraints are then traveresed to explore different branches in the program by negating each path constraint one at a time. The new path constraints are solved using an SMT solver. If the conditions are satisfied, record the new inputs and new constraints. Lastly, after each condition has been traversed, return the explored paths which can be used calculate the code coverage. The paper can be found [here](https://dl.acm.org/doi/10.1145/1064978.1065036).
 
@@ -206,7 +206,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        {% highlight pseudo %}
+        ```pseudo
         function CfgDirectedSearch(program P, initial_path p): # Continue searching until the termination condition is met
             while not termination_condition():
 
@@ -231,7 +231,7 @@ The three main strategies in this work are as follows:
             # Return the set of branches that have been covered by the search
             return covered_branches
 
-        {% endhighlight %}
+        ```
 
 2.  **Uniform Random Search**
 
@@ -246,7 +246,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        {% highlight pseudo %}
+        ```pseudo
         function UniformRandomSearch(program P, path p): # Initialize the position in the current execution path
             i = 0
 
@@ -274,7 +274,7 @@ The three main strategies in this work are as follows:
             # Return the final execution path after the search
             return p
 
-        {% endhighlight %}
+        ```
 
 3.  **Random Branch Search**
 
@@ -288,7 +288,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        {% highlight pseudo %}
+        ```pseudo
         function RandomBranchSearch(program P, path p): # Continue searching until the termination condition is met
             while not termination_condition():
 
@@ -310,7 +310,7 @@ The three main strategies in this work are as follows:
             # Return the set of branches that have been covered by the search
             return covered_branches
 
-        {% endhighlight %}
+        ```
 
 Originally, crest was implemented with Yices SMT solver which does not support non-linear operations. Later on, Heechul implemented crest with Z3 solver to enable non-linear operations. The implementation of crest-z3 can be found [here](https://github.com/heechul/crest-z3).
 
@@ -351,7 +351,7 @@ The DFS-based approach can be divided into three key stages:
         <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
     </figure>    -->
 
-    {% include figure.liquid loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid id="fig3" loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=800 alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
 
@@ -359,7 +359,7 @@ The DFS-based approach can be divided into three key stages:
 
     In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
-        {% highlight pseudo %}
+        ```pseudo
         function DFS(node, SMT_solver): 
             # If the node is empty, return since there's no condition to process
             if not node.value:
@@ -391,7 +391,7 @@ The DFS-based approach can be divided into three key stages:
             # Return the generated test inputs and the set of visited paths for coverage analysis
             return test_inputs, visited
 
-        {% endhighlight %}
+        ```
 
     When DFS(...) is invoked on the tree in [fig. 3](#fig3), it will encounter two conditionals: $a+b<20$ and $a+b<500$.
 
