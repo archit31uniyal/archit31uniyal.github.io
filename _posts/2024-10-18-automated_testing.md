@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Automated Unit testing
 date: 2024-10-18
 description: Internship work at OmniVision Technologies
@@ -9,29 +9,29 @@ featured: false
 authors:
   - name: Archit Uniyal
 
+bibliography: 2024-10-18-automated_testing.bib
 # Optionally, you can add a table of contents to your post.
 # NOTES:
 #   - make sure that TOC names match the actual section names
 #     for hyperlinks within the post to work correctly.
 #   - we may want to automate TOC generation in the future using
 #     jekyll-toc plugin (https://github.com/toshimaru/jekyll-toc).
-toc:
-  - name: What is unit testing?
-  - name: Randomized Testing
-  - name: Concolic Testing
-    subsections:
-      - name: Background
-        subsections:
-          - name: Direct Automated Random Testing (DART)
-          - name: CREST - Concolic test generation tool for C
-  - name: Depth First Search (DFS) Approach
-  - name: Resources
-    subsections:
-      - name: pycparser
-      - name: Z3 Solver
-  - name: References
-
-bibliography: 2024-10-18-automated_testing.bib
+# toc:
+#   - name: What is unit testing?
+#   - name: Randomized Testing
+#   - name: Concolic Testing
+#     subsections:
+#       - name: Background
+#         subsections:
+#           - name: Direct Automated Random Testing (DART)
+#           - name: CREST - Concolic test generation tool for C
+#   - name: Depth First Search (DFS) Approach
+#   - name: Resources
+#     subsections:
+#       - name: pycparser
+#       - name: Z3 Solver
+#   - name: References
+toc: true
 ---
 
 ## Automated Unit Testing
@@ -47,7 +47,7 @@ Unit testing is the process of fragmenting the code into smaller functional unit
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
 </figure> -->
 
-{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" img_url: '600x500' %}
+{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" %}
 
 [Figure 1](#fig1) highlights the various stages of software testing life cycle (STLC). The first four steps of STLC: test plan, analysis, design, development, require a lot of manual work as well as time to implement. Automated unit testing targets these four steps to reduce the time taken in generating these tests as well as to develop tests with higher code coverage.
 
