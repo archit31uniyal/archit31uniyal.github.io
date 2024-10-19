@@ -30,7 +30,10 @@ toc:
       - name: pycparser
       - name: Z3 Solver 
   - name: References
+
+bibliography: 2024-10-18-automated_testing.bib
 ---
+
 
 ## Automated Unit Testing
 
@@ -75,7 +78,7 @@ A naive randomized unit test generation technique which I explored during my int
 
 Provided below is an example of a target function
 
-{% highlight c %}
+{% highlight C %}
 int execute(int a, int b){
     if (a>20){
         if (b < 15){
@@ -93,13 +96,15 @@ Randomized testing leads to generation of similar data and increases time requir
 
 ### Concolic Testing
 
-Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code ([Sen, 2007](#references)). 
+Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code <d-cite key="10.1145/1321631.1321746"></d-cite>. 
+<!-- ([Sen, 2007](#references)).  -->
 
 As defined above, concolic testing can be divided into two subprocesses:
 1. **Concrete execution:** This subprocess involves the normal execution of the target code with the provided inputs.
 2. **Symbolic execution:** This subprocess involves collecting all the symbolic constraints over a set of symbolic inputs at each branch point which is encountered during concrete execution such as conditional statements, function calls, etc. 
 
-SMT solvers such as [yices](#references) and [z3](#references) are used in the symbolic execution stage to solve the constraints and keep track of the branches which have been explored.  
+SMT solvers such as <d-cite key="yices"></d-cite> and <d-cite key="10.5555/1792734.1792766"></d-cite> are used in the symbolic execution stage to solve the constraints and keep track of the branches which have been explored.  
+<!-- [yices](#references) and [z3](#references) -->
 
 Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
 
@@ -120,7 +125,8 @@ In this section, I will be discussing two concolic testing techniques which I st
 
 ##### Direct Automated Random Testing (DART)
 
-DART ([Godefroid, 2005](#references)) is a software testing algorithm which automates the process of generating and executing test cases for programs. DART combines three key techniques:
+DART <d-cite key="10.1145/1064978.1065036"></d-cite> is a software testing algorithm which automates the process of generating and executing test cases for programs. DART combines three key techniques:
+<!-- ([Godefroid, 2005](#references))  -->
 
 - **Interface extraction:** DART can automatically extract the program's interface by parsing the source code. The interface extracted include external variables, functions and arguments with which the program interacts.
 - **Random test generation:** DART employs a test driver which performs random testing on the extracted interface in order to simulate all possible inputs that the program may encounter.
@@ -167,7 +173,8 @@ The function DART(...) highlights the core of the algorithm. The algorithm takes
 
 ##### CREST - Concolic test generation tool for C
 
-CREST ([Burnim, 2008](#references)) builds on top of the concept of concolic testing by introducing several heuristic search strategies aimed at improving the effectiveness and scalibility of concolic testing for large software programs. For detailed information on crest, you can visit their website [here](https://www.burn.im/crest/).
+CREST <d-cite key="4639362"></d-cite> builds on top of the concept of concolic testing by introducing several heuristic search strategies aimed at improving the effectiveness and scalibility of concolic testing for large software programs. For detailed information on crest, you can visit their website [here](https://www.burn.im/crest/).
+<!-- ([Burnim, 2008](#references)) -->
 
 Listed below are some terminology which will help understand the pseudo code better.
 
@@ -314,7 +321,8 @@ The DFS-based approach can be divided into three key stages:
     In this stage, the conditions in the tree are traversed and converted to the desired SMT format. Additionally, the variables in the symbolic expression are converted to only include the arguments to the target function, if possible. An example of this process is shown below.
 
     For a given target function *execute*,
-    {% highlight c %}
+
+    {% highlight C %}
     int execute(int a, int b, int d){
         int c  = a + b;
         if (c<20){
@@ -328,13 +336,16 @@ The DFS-based approach can be divided into three key stages:
     }
     {% endhighlight %} 
 
+    
     [Figure 3](#fig3) below shows how the binary tree generated for the function *execute* will look. In this binary tree *c* will be replaced with '$a+b$', which will convert the conditionals to '$a+b<20$' and '$a+b<500$'.
 
     <!-- <figure align="center" id="fig3">
         <img src="../assets/img/BST.png" width=600 alt="Concolic testing">
         <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
     </figure>    -->
-    {% include figure.liquid loading="eager" path="assets/img/BST.jpg" class="img-fluid rounded z-depth-1" %}
+    
+    {% include figure.liquid path="assets/img/BST.jpg" class="img-fluid rounded z-depth-1" %}
+
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
 
@@ -660,11 +671,11 @@ Through this tutorial we have learnt how to parse C code using pycparser, conver
 
 Using all of this knowledge, now you can implement the DFS algorithm and explore more functionalities that pycparser and Z3 have to offer. Thank you for reading!
 
-### References{#references}
+<!-- ### References
 1. https://www.initialyze.com/insights/unit-testing
 2. Koushik Sen. 2007. Concolic testing. In Proceedings of the 22nd IEEE/ACM International Conference on Automated Software Engineering (ASE '07). Association for Computing Machinery, New York, NY, USA, 571–572. https://doi.org/10.1145/1321631.1321746
 3. https://yices.csl.sri.com
 4. https://microsoft.github.io/z3guide/docs/logic/intro/
 5. https://www.cs.cmu.edu/~aldrich/courses/17-355-17sp/notes/lec-concolic-sen.pdf
 6. Patrice Godefroid, Nils Klarlund, and Koushik Sen. 2005. DART: directed automated random testing. SIGPLAN Not. 40, 6 (June 2005), 213–223. https://doi.org/10.1145/1064978.1065036
-7. Burnim, Jacob, and Koushik Sen. "Heuristics for scalable dynamic test generation." 2008 23rd IEEE/ACM International Conference on Automated Software Engineering. IEEE, 2008
+7. Burnim, Jacob, and Koushik Sen. "Heuristics for scalable dynamic test generation." 2008 23rd IEEE/ACM International Conference on Automated Software Engineering. IEEE, 2008 -->
