@@ -1,0 +1,81 @@
+@inproceedings{10.1145/1321631.1321746,
+author = {Sen, Koushik},
+title = {Concolic testing},
+year = {2007},
+isbn = {9781595938824},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/1321631.1321746},
+doi = {10.1145/1321631.1321746},
+abstract = {Concolic testing automates test input generation by combining the concrete and symbolic (concolic) execution of the code under test. Traditional test input generation techniques use either (1) concrete execution or (2) symbolic execution that builds constraints and is followed by a generation of concrete test inputs from these constraints. In contrast, concolic testing tightly couples both concrete and symbolic executions: they run simultaneously, and each gets feedback from the other.We have implemented concolic testing in tools for testing both C and Java programs. We have used the tools to find bugs in several real-world software systems including SGLIB, a popular C data structure library used in a commercial tool, a third-party implementation of the Needham-Schroeder protocol and the TMN protocol, the scheduler of Honeywell's DEOS real-time operating system, and the Sun Microsystems' JDK 1.4 collection framework. In this tutorial, we will describe concolic testing and some of its recent extensions},
+booktitle = {Proceedings of the 22nd IEEE/ACM International Conference on Automated Software Engineering},
+pages = {571–572},
+numpages = {2},
+keywords = {concolic testing, data structure testing, explicit path model-checking, random testing, symbolic execution, testing C programs, testing tools, unit testing},
+location = {Atlanta, Georgia, USA},
+series = {ASE '07}
+}
+
+@article{10.1145/1064978.1065036,
+author = {Godefroid, Patrice and Klarlund, Nils and Sen, Koushik},
+title = {DART: directed automated random testing},
+year = {2005},
+issue_date = {June 2005},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+volume = {40},
+number = {6},
+issn = {0362-1340},
+url = {https://doi.org/10.1145/1064978.1065036},
+doi = {10.1145/1064978.1065036},
+abstract = {We present a new tool, named DART, for automatically testing software that combines three main techniques: (1) automated extraction of the interface of a program with its external environment using static source-code parsing; (2) automatic generation of a test driver for this interface that performs random testing to simulate the most general environment the program can operate in; and (3) dynamic analysis of how the program behaves under random testing and automatic generation of new test inputs to direct systematically the execution along alternative program paths. Together, these three techniques constitute Directed Automated Random Testing, or DART for short. The main strength of DART is thus that testing can be performed completely automatically on any program that compiles -- there is no need to write any test driver or harness code. During testing, DART detects standard errors such as program crashes, assertion violations, and non-termination. Preliminary experiments to unit test several examples of C programs are very encouraging.},
+journal = {SIGPLAN Not.},
+month = jun,
+pages = {213–223},
+numpages = {11},
+keywords = {software testing, random testing, program verification, interfaces, automated test generation}
+}
+
+@INPROCEEDINGS{4639362,
+  author={Burnim, Jacob and Sen, Koushik},
+  booktitle={2008 23rd IEEE/ACM International Conference on Automated Software Engineering}, 
+  title={Heuristics for Scalable Dynamic Test Generation}, 
+  year={2008},
+  volume={},
+  number={},
+  pages={443-446},
+  keywords={Testing;Distance measurement;Benchmark testing;Force;Flow graphs;Aerospace electronics;Software},
+  doi={10.1109/ASE.2008.69}}
+
+@misc{unit_testing,
+  title = {Unit Testing: A Proactive Approach to Software Quality Assurance},
+  howpublished = {\url{https://www.initialyze.com/insights/unit-testing}},
+  note = {Accessed: 2023-07-23}
+}
+
+@misc{yices,
+  title = {Yices: SMT Solver},
+  howpublished = {\url{https://yices.csl.sri.com}},
+  note = {Accessed: 2024-08-05}
+}
+
+@inproceedings{10.5555/1792734.1792766,
+author = {De Moura, Leonardo and Bj\o{}rner, Nikolaj},
+title = {Z3: an efficient SMT solver},
+year = {2008},
+isbn = {3540787992},
+publisher = {Springer-Verlag},
+address = {Berlin, Heidelberg},
+abstract = {Satisfiability Modulo Theories (SMT) problem is a decision problem for logical first order formulas with respect to combinations of background theories such as: arithmetic, bit-vectors, arrays, and uninterpreted functions. Z3 is a new and efficient SMT Solver freely available from Microsoft Research. It is used in various software verification and analysis applications.},
+booktitle = {Proceedings of the Theory and Practice of Software, 14th International Conference on Tools and Algorithms for the Construction and Analysis of Systems},
+pages = {337–340},
+numpages = {4},
+location = {Budapest, Hungary},
+series = {TACAS'08/ETAPS'08}
+}
+
+@misc{concolic_test,
+  title = {Concolic Testing: Lecture Notes},
+  howpublished = {\url{https://www.cs.cmu.edu/~aldrich/courses/17-355-17sp/notes/lec-concolic-sen.pdf}},
+  note = {Accessed: 2024-10-19}
+}
