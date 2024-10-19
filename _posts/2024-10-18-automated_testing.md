@@ -33,7 +33,7 @@ bibliography: 2024-10-18-automated_testing.bib
 #   - name: References
 
 toc:
-    sidebar: "left"
+    sidebar: 'left'
 ---
 
 In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code as well as the approach I developed during my internship at OmniVision Technologies.
@@ -47,7 +47,7 @@ Unit testing is the process of fragmenting the code into smaller functional unit
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
 </figure> -->
 
-{% include figure.liquid id="fig1" loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" width=800 alt="STLC" caption="Figure 1. Software Testing Life Cycle" %}
+{% include figure.liquid id="fig1" loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" width=auto alt="STLC" caption="Figure 1. Software Testing Life Cycle" %}
 
 [Figure 1](#fig1) highlights the various stages of software testing life cycle (STLC). The first four steps of STLC: test plan, analysis, design, development, require a lot of manual work as well as time to implement. Automated unit testing targets these four steps to reduce the time taken in generating these tests as well as to develop tests with higher code coverage.
 
@@ -57,29 +57,29 @@ In the following sections, we will be discussing two most commonly used unit tes
 
 Randomized testing involves testing a program iteratively using random, independent inputs. The example below shows a simple absolute function which takes in as input an integer and returns its absolute value.
 
-    ```python
+    {% highlight python %}
     def abs(x: int):
     if x > 0:
         return x
     else:
         return x # Bug: should be '-x'
-    ```
+    {% endhighlight %}
 
 Let's assume, the random input generator generates {18, 31, 3, 21, -15}. '-15' is the only input which will trigger the bug.
 
-    ```python
+    {% highlight python %}
     def testAbs(n: int):
-    for i in range(n):
-        x = random.randint(-1000, 1000)
-        result = abs(x)
-        assert(result >= 0)
-    ```
+        for i in range(n):
+            x = random.randint(-1000, 1000)
+            result = abs(x)
+            assert(result >= 0)
+    {% endhighlight %}
 
 A naive randomized unit test generation technique which I explored during my internship included extracting the arguments and their datatypes. The datatype of each argument was used to set a range of values from which a random value would be generated for the corresponding argument.
 
 Provided below is an example of a target function
 
-    ```c
+    {% highlight C %}
     int execute(int a, int b){
         if (a>20){
             if (b < 15){
@@ -88,9 +88,8 @@ Provided below is an example of a target function
             }
         else
             return -1;
-        }
     }
-    ```
+    {% endhighlight %}
 
 For the example, above the algorithm would fetch the arguments for function using its abstract syntax tree (AST). Here since both arguments are integers, therefore the random values for _a_ and _b_ would be generated within the range \[-2<sup>32</sup>, 2<sup>32</sup>\). The GOAL condition would be achieved for all _a>20_ and _b<15_.
 
@@ -118,9 +117,9 @@ Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It 
     <figcaption>Figure 2. Concolic testing</figcaption>
 </figure> -->
 
-{% include figure.liquid id="fig2" loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" width=800 alt="Concolic testing" caption="Figure 2. Concolic testing" %}
+{% include figure.liquid id="fig2" loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 2. Concolic testing" %}
 
-As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $$ x=x_0, y=y_0$$ and $$z=2*y $$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
+As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $$ x=x_0, y=y_0$ and $z=2*y $$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
 $$(2*y_0 == x_0) \land (x_0 > y_0 + 10)$$
 
 In order to solve the constraint above, an SMT solver can be used which would return values for $$x_0$$ and $$y_0$$ which would satisfy the constraint.
@@ -141,7 +140,7 @@ DART <d-cite key="10.1145/1064978.1065036"></d-cite> is a software testing algor
 
 The pseudo code below provides a systematic explanation of how the algorithm functions.
 
-    ```
+    {% highlight %}
     function DART(program, initial_input): # Initialize with initial random input
         input_queue = [initial_input]
         explored_paths = set()
@@ -173,7 +172,7 @@ The pseudo code below provides a systematic explanation of how the algorithm fun
                     explored_paths.add(new_constraints)
 
         return explored_paths
-    ```
+        {% endhighlight %}
 
 The function DART(...) highlights the core of the algorithm. The algorithm takes random inputs along with the program as arguments, which are later used to generate the execution trace and the path constraints encountered. The execution trace is stored to keep tracks of paths covered. The path constraints are then traveresed to explore different branches in the program by negating each path constraint one at a time. The new path constraints are solved using an SMT solver. If the conditions are satisfied, record the new inputs and new constraints. Lastly, after each condition has been traversed, return the explored paths which can be used calculate the code coverage. The paper can be found [here](https://dl.acm.org/doi/10.1145/1064978.1065036).
 
@@ -206,7 +205,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        ```
+        {% highlight %}
         function CfgDirectedSearch(program P, initial_path p): # Continue searching until the termination condition is met
             while not termination_condition():
 
@@ -230,7 +229,8 @@ The three main strategies in this work are as follows:
 
             # Return the set of branches that have been covered by the search
             return covered_branches
-        ```
+
+        {% endhighlight %}
 
 2.  **Uniform Random Search**
 
@@ -245,7 +245,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        ```
+        {% highlight %}
         function UniformRandomSearch(program P, path p): # Initialize the position in the current execution path
             i = 0
 
@@ -272,7 +272,7 @@ The three main strategies in this work are as follows:
 
             # Return the final execution path after the search
             return p
-        ```
+        {% endhighlight %}
 
 3.  **Random Branch Search**
 
@@ -286,7 +286,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        ```
+        {% highlight %}
         function RandomBranchSearch(program P, path p): # Continue searching until the termination condition is met
             while not termination_condition():
 
@@ -307,7 +307,8 @@ The three main strategies in this work are as follows:
 
             # Return the set of branches that have been covered by the search
             return covered_branches
-        ```
+
+        {% endhighlight %}
 
 Originally, crest was implemented with Yices SMT solver which does not support non-linear operations. Later on, Heechul implemented crest with Z3 solver to enable non-linear operations. The implementation of crest-z3 can be found [here](https://github.com/heechul/crest-z3).
 
@@ -326,9 +327,9 @@ The DFS-based approach can be divided into three key stages:
 
     For a given target function _execute_,
 
-        ```c
+        {% highlight C %}
         int execute(int a, int b, int d){
-            int c  = a + b;
+            int c = a + b;
             if (c<20){
                 return -1;
             }
@@ -338,8 +339,10 @@ The DFS-based approach can be divided into three key stages:
             else
                 return c*d;
         }
-        ```
+        
+        {% endhighlight %}
 
+    
     [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
 
     <!-- <figure align="center" id="fig3">
@@ -347,7 +350,7 @@ The DFS-based approach can be divided into three key stages:
         <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
     </figure>    -->
 
-        {% include figure.liquid id="fig3" loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=800 alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
+        {% include figure.liquid id="fig3" loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
 
@@ -355,7 +358,7 @@ The DFS-based approach can be divided into three key stages:
 
     In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
-        ```
+        {% highlight %}
         function DFS(node, SMT_solver): 
             # If the node is empty, return since there's no condition to process
             if not node.value:
@@ -386,7 +389,8 @@ The DFS-based approach can be divided into three key stages:
 
             # Return the generated test inputs and the set of visited paths for coverage analysis
             return test_inputs, visited
-        ```
+
+        {% endhighlight %}
 
     When DFS(...) is invoked on the tree in [fig. 3](#fig3), it will encounter two conditionals: $a+b<20$ and $a+b<500$.
 
@@ -427,19 +431,19 @@ We can perform this preprocessing using pycparser's `parse_file` function. It wi
 
 Alternatives for `cpp` are also available such as `gcc` and `clang` using the `-E` flag. An example on how to use `parse_file` is provided below.
 
-    ```python
+    {% highlight python %}
     from pycparser import parse_file
 
     ast = parse_file(filename, use_cpp=True,
                 cpp_path='gcc',
                 cpp_args=['-E', r'-Iutils/fake_libc_include'])
-    ```
+    {% endhighlight %}
 
 `filename` refers to the path to the C program. The code above will help in attaining the abstract syntax tree (AST) of the C code. The next step is to traverse the AST.
 
 For instance, the C code under consideration is as follows.
 
-    ```C
+    {% highlight C %}
     int main() {
         int x = 10;
         if (x > 5) {
@@ -450,34 +454,34 @@ For instance, the C code under consideration is as follows.
         }
         return x;
     }
-    ```
+    {% endhighlight %}
 
 The following code will help traverse the AST for if conditions.
 
-    ```python
-    from pycparser import parse_file, c_ast
+    {% highlight python %}
+        from pycparser import parse_file, c_ast
 
-    ast = parse_file(filename, use_cpp=True,
-                cpp_path='gcc',
-                cpp_args=['-E', r'-Iutils/fake_libc_include'])
+        ast = parse_file(filename, use_cpp=True,
+                    cpp_path='gcc',
+                    cpp_args=['-E', r'-Iutils/fake_libc_include'])
 
-    # Function to recursively traverse the AST and find if conditions
-    def find_if_conditions(node, indent=0):
-        if isinstance(node, c_ast.If):
-            # Print the condition of the if statement
-            print(' ' * indent + f"If condition found: {node.cond.coord}")
-            print(' ' * indent + f"Condition: {node.cond}")
+        # Function to recursively traverse the AST and find if conditions
+        def find_if_conditions(node, indent=0):
+            if isinstance(node, c_ast.If):
+                # Print the condition of the if statement
+                print(' ' * indent + f"If condition found: {node.cond.coord}")
+                print(' ' * indent + f"Condition: {node.cond}")
 
-        # Recursively traverse child nodes
-        for child in node:
-            find_if_conditions(child, indent + 2)
+            # Recursively traverse child nodes
+            for child in node:
+                find_if_conditions(child, indent + 2)
 
-    find_if_conditions(ast)
-    ```
+        find_if_conditions(ast)
+    {% endhighlight %}
 
 The output will look something like this
 
-    ```mathematica
+    {% highlight mathematica %}
     If condition found at <c_code>:5:5:
     Condition:
         BinaryOp (>)
@@ -488,71 +492,71 @@ The output will look something like this
         BinaryOp (<)
         ID: x
         Constant: int, 20
-    ```
+    {% endhighlight %}
 
 The output can then be converted into SMT format to be processed by a solver using z3-solver python binding which will be discussed in the next section.
 
 Since we can now extract the if statements, we can build our binary tree accordingly by assigning conditions in the `iftrue` block in the AST to the left node and the conditions in the `iffalse` block in the AST to the right node.
 
-    ```python
-    class BinaryTreeNode:
-        def __init__(self, value=None, left=None, right=None):
-            self.value = value
-            self.left = left
-            self.right = right
+    {% highlight python %}
+        class BinaryTreeNode:
+            def __init__(self, value=None, left=None, right=None):
+                self.value = value
+                self.left = left
+                self.right = right
 
-    tree = []
-    def convert2binary(node):
-        if isinstance(node, c_ast.If):
-            # call binary node creator function
-            return handle_if(node)
+        tree = []
+        def convert2binary(node):
+            if isinstance(node, c_ast.If):
+                # call binary node creator function
+                return handle_if(node)
 
-        # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
-        for child in node:
-            tree.append(convert2binary(child))
+            # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
+            for child in node:
+                tree.append(convert2binary(child))
 
-    def handle_if(node):
-        cond = node.cond
-        if_true = convert2binary(node.iftrue)
-        if_false = convert2binary(node.iffalse)
-        return BinaryTreeNode(cond, if_true, if_false)
-    ```
+        def handle_if(node):
+            cond = node.cond
+            if_true = convert2binary(node.iftrue)
+            if_false = convert2binary(node.iffalse)
+            return BinaryTreeNode(cond, if_true, if_false)
+    {% endhighlight %}
 
 The complete code will look as follows:
 
-    ```python
-    from pycparser import parse_file, c_ast
+    {% highlight python %}
+        from pycparser import parse_file, c_ast
 
-    ast = parse_file(filename, use_cpp=True,
-                cpp_path='gcc',
-                cpp_args=['-E', r'-Iutils/fake_libc_include'])
+        ast = parse_file(filename, use_cpp=True,
+                    cpp_path='gcc',
+                    cpp_args=['-E', r'-Iutils/fake_libc_include'])
 
-    class BinaryTreeNode:
-        def __init__(self, value=None, left=None, right=None):
-            self.value = value
-            self.left = left
-            self.right = right
+        class BinaryTreeNode:
+            def __init__(self, value=None, left=None, right=None):
+                self.value = value
+                self.left = left
+                self.right = right
 
-    tree = []
+        tree = []
 
-    def convert2binary(node):
-        if isinstance(node, c_ast.If):
-            # call binary node creator function
-            return handle_if(node)
+        def convert2binary(node):
+            if isinstance(node, c_ast.If):
+                # call binary node creator function
+                return handle_if(node)
 
-        # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
-        for child in node:
-            tree.append(convert2binary(child))
+            # Recursively traverse child nodes and append the return BinaryTreeNode object to tree
+            for child in node:
+                tree.append(convert2binary(child))
 
-    def handle_if(node):
-        cond = node.cond
-        if_true = convert2binary(node.iftrue)
-        if_false = convert2binary(node.iffalse)
-        return BinaryTreeNode(cond, if_true, if_false)
+        def handle_if(node):
+            cond = node.cond
+            if_true = convert2binary(node.iftrue)
+            if_false = convert2binary(node.iffalse)
+            return BinaryTreeNode(cond, if_true, if_false)
 
-    convert2binary(ast)
-    print(tree)
-    ```
+        convert2binary(ast)
+        print(tree)
+    {% endhighlight %}
 
 #### Z3 Solver
 
@@ -566,50 +570,50 @@ Z3 can be installed in python using the following command:
 
 Converting a binary operation to Z3 format expression
 
-    ```python
-    from z3 import *
-    from pycparser import c_ast
+    {% highlight python %}
+        from z3 import *
+        from pycparser import c_ast
 
-    def convert_to_z3_format(cond):
-        if isinstance(cond, c_ast.BinaryOp):
-            left = convert_to_z3_format(cond.left)
-            right = convert_to_z3_format(cond.right)
+        def convert_to_z3_format(cond):
+            if isinstance(cond, c_ast.BinaryOp):
+                left = convert_to_z3_format(cond.left)
+                right = convert_to_z3_format(cond.right)
 
-            if cond.op == '==':
-                return left == right
-            elif cond.op == '!=':
-                return left != right
-            elif cond.op == '<':
-                return left < right
-            elif cond.op == '>':
-                return left > right
-            elif cond.op == '<=':
-                return left <= right
-            elif cond.op == '>=':
-                return left >= right
-            elif cond.op == '&&':
-                return And(left, right)
-            elif cond.op == '||':
-                return Or(left, right)
-            elif cond.op == '+':
-                return left + right
-            elif cond.op == '-':
-                return left - right
-            elif cond.op == '*':
-                return left * right
-            elif cond.op == '/':
-                return left / right
+                if cond.op == '==':
+                    return left == right
+                elif cond.op == '!=':
+                    return left != right
+                elif cond.op == '<':
+                    return left < right
+                elif cond.op == '>':
+                    return left > right
+                elif cond.op == '<=':
+                    return left <= right
+                elif cond.op == '>=':
+                    return left >= right
+                elif cond.op == '&&':
+                    return And(left, right)
+                elif cond.op == '||':
+                    return Or(left, right)
+                elif cond.op == '+':
+                    return left + right
+                elif cond.op == '-':
+                    return left - right
+                elif cond.op == '*':
+                    return left * right
+                elif cond.op == '/':
+                    return left / right
 
-        elif isinstance(cond, c_ast.ID):
-            return Int(cond.name)
-        elif isinstance(cond, c_ast.Constant):
-            if cond.type == 'int':
-                return IntVal(int(cond.value))
+            elif isinstance(cond, c_ast.ID):
+                return Int(cond.name)
+            elif isinstance(cond, c_ast.Constant):
+                if cond.type == 'int':
+                    return IntVal(int(cond.value))
+                else:
+                    raise Exception(f"Unsupported constant type: {cond.type}")
             else:
-                raise Exception(f"Unsupported constant type: {cond.type}")
-        else:
-            raise Exception(f"Unsupported condition: {type(cond)}")
-    ```
+                raise Exception(f"Unsupported condition: {type(cond)}")
+    {% endhighlight %}
 
 The function `convert_to_z3_format` takes as input a condition extraction from the AST as shown in the previous section and converts it to a format which can be solved using the Z3 solver.
 
@@ -650,27 +654,27 @@ In this subsection, I will be discussing on solving symbolic expression using th
 
 Provided below is a simple example on how z3 solver can be used to attain inputs.
 
-    ```python
-    from z3 import *
+    {% highlight python %}
+        from z3 import *
 
-    def solve_constraints(conds):
-        solver = Solver()
-        for cond in conds:
-            solver.add(cond)
+        def solve_constraints(conds):
+            solver = Solver()
+            for cond in conds:
+                solver.add(cond)
 
-        if solver.check():
-            model = solver.model
-            print ("traversing model...")
-            # print the variables and their values required to solve the constraints
-            for d in m.decls():
-                print ("%s = %s" % (d.name(), m[d]))
+            if solver.check():
+                model = solver.model
+                print ("traversing model...")
+                # print the variables and their values required to solve the constraints
+                for d in m.decls():
+                    print ("%s = %s" % (d.name(), m[d]))
 
-        return model
+            return model
 
-    x, y, z = Real('x y z')
-    conds = [x > 1, y > 1, x + y > 3, z - x < 10]
-    solved_values = solve_constraints(conds)
-    ```
+        x, y, z = Real('x y z')
+        conds = [x > 1, y > 1, x + y > 3, z - x < 10]
+        solved_values = solve_constraints(conds)
+    {% endhighlight %}
 
 
 Through this tutorial we have learnt how to parse C code using pycparser, convert the conditions to Z3 compatible format and solve them using Z3 solver. Now we can implement the DFS algorithm and explore more functionalities that pycparser and Z3 have to offer. Thank you for reading!
