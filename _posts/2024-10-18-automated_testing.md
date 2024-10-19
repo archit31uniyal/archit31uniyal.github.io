@@ -36,7 +36,7 @@ toc:
     sidebar: 'left'
 ---
 
-In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code as well as the approach I developed during my internship at OmniVision Technologies.
+In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code. We will also be discussing the approach I developed during my internship at OmniVision Technologies.
 
 ### What is unit testing?
 
@@ -140,7 +140,7 @@ DART <d-cite key="10.1145/1064978.1065036"></d-cite> is a software testing algor
 
 The pseudo code below provides a systematic explanation of how the algorithm functions.
 
-    {% highlight %}
+    {% highlight pseudocode%}
     function DART(program, initial_input): # Initialize with initial random input
         input_queue = [initial_input]
         explored_paths = set()
@@ -205,7 +205,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        {% highlight %}
+        {% highlight pseudocode %}
         function CfgDirectedSearch(program P, initial_path p): # Continue searching until the termination condition is met
             while not termination_condition():
 
@@ -245,7 +245,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        {% highlight %}
+        {% highlight pseudocode %}
         function UniformRandomSearch(program P, path p): # Initialize the position in the current execution path
             i = 0
 
@@ -286,7 +286,7 @@ The three main strategies in this work are as follows:
 
     **Pseudo Code**
 
-        {% highlight %}
+        {% highlight pseudocode %}
         function RandomBranchSearch(program P, path p): # Continue searching until the termination condition is met
             while not termination_condition():
 
@@ -358,7 +358,7 @@ The DFS-based approach can be divided into three key stages:
 
     In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
-        {% highlight %}
+        {% highlight pseudocode %}
         function DFS(node, SMT_solver): 
             # If the node is empty, return since there's no condition to process
             if not node.value:
