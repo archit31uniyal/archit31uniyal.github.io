@@ -31,10 +31,10 @@ bibliography: 2024-10-18-automated_testing.bib
 #       - name: pycparser
 #       - name: Z3 Solver
 #   - name: References
-toc: true
----
 
-## Automated Unit Testing
+toc:
+    beginning: true
+---
 
 In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code as well as the approach I developed during my internship at OmniVision Technologies.
 
@@ -47,7 +47,7 @@ Unit testing is the process of fragmenting the code into smaller functional unit
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
 </figure> -->
 
-{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" %}
+{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" width=600 alt="STLC caption="Figure 1. Software Testing Life Cycle" %}
 
 [Figure 1](#fig1) highlights the various stages of software testing life cycle (STLC). The first four steps of STLC: test plan, analysis, design, development, require a lot of manual work as well as time to implement. Automated unit testing targets these four steps to reduce the time taken in generating these tests as well as to develop tests with higher code coverage.
 
@@ -329,19 +329,20 @@ The DFS-based approach can be divided into three key stages:
 
     For a given target function _execute_,
 
-    {% highlight C %}
-    int execute(int a, int b, int d){
-        int c = a + b;
-        if (c<20){
-            return -1;
+        {% highlight C %}
+        int execute(int a, int b, int d){
+            int c = a + b;
+            if (c<20){
+                return -1;
+            }
+            else if (c<500){
+                return c%d;
+            }
+            else
+                return c*d;
         }
-        else if (c<500){
-            return c%d;
-        }
-        else
-            return c*d;
-    }
-    {% endhighlight %}
+        
+        {% endhighlight %}
 
     [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
 
