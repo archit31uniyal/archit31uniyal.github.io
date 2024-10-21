@@ -320,9 +320,9 @@ In this section, we will discussing the DFS based approach I developed during my
 
 The DFS-based approach can be divided into three key stages:
 
-1.  **Traverse and extract information from the abstract syntax tree (AST)**
+- **Traverse and extract information from the abstract syntax tree (AST)**
     For a given target program, the approach first generates its AST which will be used in the following stages. The AST is then traveresed to generate a binary tree using the conditional statements. The left nodes in the tree represent the true blocks and the right nodes represent the false blocks.
-2.  **Convert conditions to SMT format**
+- **Convert conditions to SMT format**
     In this stage, the conditions in the tree are traversed and converted to the desired SMT format. Additionally, the variables in the symbolic expression are converted to only include the arguments to the target function, if possible. An example of this process is shown below.
 
     For a given target function _execute_,
@@ -349,43 +349,43 @@ The DFS-based approach can be divided into three key stages:
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
 
-3.  **DFS traversal**
+- **DFS traversal**
 
     In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
-    {% highlight pseudocode %}
-    function DFS(node, SMT_solver): 
-        # If the node is empty, return since there's no condition to process
-        if not node.value:
-            return
+        {% highlight pseudocode %}
+        function DFS(node, SMT_solver): 
+            # If the node is empty, return since there's no condition to process
+            if not node.value:
+                return
 
-        # Add the current condition to the path and mark it as visited
-        path.append(node.value)
-        visited.add(node.value)
+            # Add the current condition to the path and mark it as visited
+            path.append(node.value)
+            visited.add(node.value)
 
-        # Traverse the true (left) branch if it exists
-        if node.left:
-            DFS(node.left, SMT_solver)
-            # Solve the path using the SMT solver and store the resulting test inputs
+            # Traverse the true (left) branch if it exists
+            if node.left:
+                DFS(node.left, SMT_solver)
+                # Solve the path using the SMT solver and store the resulting test inputs
+                test_inputs.append(SMT_solver.solve(path))
+
+            # Negate the last condition to explore the false (right) branch
+            path[-1] = Negate(path[-1])
+
+            # Traverse the false (right) branch if it exists
+            if node.right:
+                DFS(node.right, SMT_solver)
+                # Solve the path using the SMT solver and store the resulting test inputs
+                test_inputs.append(SMT_solver.solve(path))
+
+            # After exploring both branches, solve the path with all conditions negated
+            path[-1] = Negate(path[-1])
             test_inputs.append(SMT_solver.solve(path))
 
-        # Negate the last condition to explore the false (right) branch
-        path[-1] = Negate(path[-1])
+            # Return the generated test inputs and the set of visited paths for coverage analysis
+            return test_inputs, visited
 
-        # Traverse the false (right) branch if it exists
-        if node.right:
-            DFS(node.right, SMT_solver)
-            # Solve the path using the SMT solver and store the resulting test inputs
-            test_inputs.append(SMT_solver.solve(path))
-
-        # After exploring both branches, solve the path with all conditions negated
-        path[-1] = Negate(path[-1])
-        test_inputs.append(SMT_solver.solve(path))
-
-        # Return the generated test inputs and the set of visited paths for coverage analysis
-        return test_inputs, visited
-
-    {% endhighlight %}
+        {% endhighlight %}
 
 
     When _DFS_ is invoked on the tree in [fig. 3](#fig3), it will encounter two conditionals: $$a+b<20$$ and $$a+b<500$$.
