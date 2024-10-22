@@ -327,9 +327,27 @@ The DFS-based approach can be divided into three key stages:
 
     For a given target function _execute_,
 
-    $$Figure 3$$ below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
+        ```C
+        int execute(int a, int b, int d){
+            int c = a + b;
+            if (c<20){
+                return -1;
+            }
+            else if (c<500){
+                return c%d;
+            }
+            else
+                return c*d;
+        }
+        
+        ```
+
+    [Figure 3]("fig3") below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
     
-    {% include figure.liquid id="fig3" loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
+    <figure align="center" id="fig3">
+       <img src="../assets/img/BST.png" width=400 alt="Concolic testing">
+       <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
+   </figure>
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
 
