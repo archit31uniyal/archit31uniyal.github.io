@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Automated Unit testing
 date: 2024-09-03
 description: Internship work at OmniVision Technologies
@@ -7,7 +7,7 @@ tags: formatting code
 categories: sample-posts
 featured: true
 toc: 
-    sidebar: "left"
+    beginning: true
 ---
 
 In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code as well as the approach I developed during my internship at OmniVision Technologies.
@@ -259,6 +259,7 @@ The three main strategies in this work are as follows:
            # Randomly select a branch from the current execution path
            random_branch = select_random_branch(p)
 
+           # If the selected branch is valid for forcing
            if random_branch is valid:
 
                # Force the execution along the selected branch to generate a new path
