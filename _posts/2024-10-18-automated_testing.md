@@ -110,14 +110,14 @@ SMT solvers such as <d-cite key="yices"></d-cite> and <d-cite key="10.5555/17927
 
 <!-- [yices](#references) and [z3](#references) -->
 
-Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
-
 <!-- <figure align="center" id="fig2">
     <img src="../assets/img/Concolic+Testing+Approach.jpg" width=600 alt="Concolic testing">
     <figcaption>Figure 2. Concolic testing</figcaption>
 </figure> -->
 
 {% include figure.liquid id="fig2" loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 2. Concolic testing" %}
+
+Koushik Sen's example of concolic testing is depicted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
 
 As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $$ x=x_0, y=y_0 $$ and $$ z=2*y $$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
 $$(2*y_0 == x_0) \land (x_0 > y_0 + 10)$$
@@ -341,7 +341,7 @@ The DFS-based approach can be divided into three key stages:
     }
     ```
 
-    [Figure 3]("fig3") below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
+    _Figure 3_ below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
     
     <figure align="center" id="fig3">
        <img src="../assets/img/BST.png" width=400 alt="Concolic testing">

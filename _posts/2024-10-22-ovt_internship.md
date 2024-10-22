@@ -17,7 +17,7 @@ In this blog, we will be discussing automated unit testing, various techniques u
 Unit testing is the process of fragmenting the code into smaller functional units and performing individual tests on these units. Unit testing has become a crucial part of the software testing lifecycle. It enables developers to identify bugs, logical flaws as well as decipher inputs which increase code coverage.
 
 <figure align="center" id="fig1">
-    <img src="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" width=600 alt="STLC">
+    <img src="../assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" width=600 alt="STLC">
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
 </figure>
 
@@ -82,7 +82,7 @@ SMT solvers such as [yices](#references) and [z3](#references) are used in the s
 Koushik Sen's example of concolic testing is depiceted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
 
 <figure align="center" id="fig2">
-    <img src="assets/img/Concolic+Testing+Approach.jpg" width=600 alt="Concolic testing">
+    <img src="../assets/img/Concolic+Testing+Approach.jpg" width=600 alt="Concolic testing">
     <figcaption>Figure 2. Concolic testing</figcaption>
 </figure>
 
@@ -259,7 +259,6 @@ The three main strategies in this work are as follows:
            # Randomly select a branch from the current execution path
            random_branch = select_random_branch(p)
 
-           # If the selected branch is valid for forcing
            if random_branch is valid:
 
                # Force the execution along the selected branch to generate a new path
@@ -309,7 +308,7 @@ The DFS-based approach can be divided into three key stages:
    [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$a+b$', which will convert the conditionals to '$a+b<20$' and '$a+b<500$'.
 
    <figure align="center" id="fig3">
-       <img src="assets/img/BST.png" width=600 alt="Concolic testing">
+       <img src="../assets/img/BST.png" width=600 alt="Concolic testing">
        <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
    </figure>
 
