@@ -344,7 +344,7 @@ The DFS-based approach can be divided into three key stages:
     [Figure 3]("fig3") below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
     
     <figure align="center" id="fig3">
-       <img src="assets/img/BST.png" width=400 alt="Concolic testing">
+       <img src="../assets/img/BST.png" width=400 alt="Concolic testing">
        <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
    </figure>
 
