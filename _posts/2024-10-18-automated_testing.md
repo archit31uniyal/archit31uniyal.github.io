@@ -354,40 +354,38 @@ The DFS-based approach can be divided into three key stages:
 
     In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
-        {% highlight pseudocode %}
-        function DFS(node, SMT_solver): 
-            # If the node is empty, return since there's no condition to process
-            if not node.value:
-                return
+    ```
+    function DFS(node, SMT_solver): 
+        # If the node is empty, return since there's no condition to process
+        if not node.value:
+            return
 
-            # Add the current condition to the path and mark it as visited
-            path.append(node.value)
-            visited.add(node.value)
+        # Add the current condition to the path and mark it as visited
+        path.append(node.value)
+        visited.add(node.value)
 
-            # Traverse the true (left) branch if it exists
-            if node.left:
-                DFS(node.left, SMT_solver)
-                # Solve the path using the SMT solver and store the resulting test inputs
-                test_inputs.append(SMT_solver.solve(path))
-
-            # Negate the last condition to explore the false (right) branch
-            path[-1] = Negate(path[-1])
-
-            # Traverse the false (right) branch if it exists
-            if node.right:
-                DFS(node.right, SMT_solver)
-                # Solve the path using the SMT solver and store the resulting test inputs
-                test_inputs.append(SMT_solver.solve(path))
-
-            # After exploring both branches, solve the path with all conditions negated
-            path[-1] = Negate(path[-1])
+        # Traverse the true (left) branch if it exists
+        if node.left:
+            DFS(node.left, SMT_solver)
+            # Solve the path using the SMT solver and store the resulting test inputs
             test_inputs.append(SMT_solver.solve(path))
 
-            # Return the generated test inputs and the set of visited paths for coverage analysis
-            return test_inputs, visited
+        # Negate the last condition to explore the false (right) branch
+        path[-1] = Negate(path[-1])
 
-        {% endhighlight %}
+        # Traverse the false (right) branch if it exists
+        if node.right:
+            DFS(node.right, SMT_solver)
+            # Solve the path using the SMT solver and store the resulting test inputs
+            test_inputs.append(SMT_solver.solve(path))
 
+        # After exploring both branches, solve the path with all conditions negated
+        path[-1] = Negate(path[-1])
+        test_inputs.append(SMT_solver.solve(path))
+
+        # Return the generated test inputs and the set of visited paths for coverage analysis
+        return test_inputs, visited
+    ```
 
     When _DFS_ is invoked on the tree in [fig. 3](#fig3), it will encounter two conditionals: $$a+b<20$$ and $$a+b<500$$.
 
