@@ -9,6 +9,7 @@ featured: false
 authors:
   - name: Archit Uniyal
 
+pseudocode: true
 bibliography: 2024-10-18-automated_testing.bib
 # Optionally, you can add a table of contents to your post.
 # NOTES:
@@ -343,7 +344,7 @@ The DFS-based approach can be divided into three key stages:
 
     [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
     
-    {% include figure.liquid id="fig3" loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
+    <a id="fig3"> {% include figure.liquid loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %} </a>
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs the SMT solver.
 
@@ -351,7 +352,7 @@ The DFS-based approach can be divided into three key stages:
 
     In this stage, the acquired binary tree is traversed to discover new paths. The pseudo code below shows the algorithm.
 
-    ```
+    ```pseudocode
     function DFS(node, SMT_solver): 
         # If the node is empty, return since there's no condition to process
         if not node.value:
@@ -670,7 +671,7 @@ Provided below is a simple example on how z3 solver can be used to attain inputs
 
 
 Through this tutorial we have learnt how to parse C code using pycparser, convert the conditions to Z3 compatible format and solve them using Z3 solver. Now we can implement the DFS algorithm and explore more functionalities that pycparser and Z3 have to offer. Thank you for reading!
-
+<d-appendix>
 ### References
 <a id="1">[1]</a> 
 https://www.initialyze.com/insights/unit-testing
