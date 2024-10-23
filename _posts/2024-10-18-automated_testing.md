@@ -10,7 +10,9 @@ authors:
   - name: Archit Uniyal
 
 pseudocode: true
-
+giscus_comments: true
+related_publications: true
+related_posts: false
 bibliography: 2024-10-18-automated_testing.bib
 # Optionally, you can add a table of contents to your post.
 # NOTES:
@@ -49,7 +51,7 @@ Unit testing is the process of fragmenting the code into smaller functional unit
     <figcaption>Figure 1. Software Testing Life Cycle</figcaption>
 </figure> -->
 
-<a id="fig2">{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" width=auto alt="STLC" caption="Figure 1. Software Testing Life Cycle" %}</a>
+<a id="fig1"></a>{% include figure.liquid loading="eager" path="assets/img/7-Stages-of-Software-Testing-Life-Cycle_11.jpg" class="img-fluid rounded z-depth-1" width=auto alt="STLC" caption="Figure 1. Software Testing Life Cycle" %}
 
 [Figure 1](#fig1) highlights the various stages of software testing life cycle (STLC). The first four steps of STLC: test plan, analysis, design, development, require a lot of manual work as well as time to implement. Automated unit testing targets these four steps to reduce the time taken in generating these tests as well as to develop tests with higher code coverage.
 
@@ -99,9 +101,7 @@ Randomized testing leads to generation of similar data and increases time requir
 
 ### Concolic Testing
 
-Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code [[Sen, 2007]](#2). <d-cite key="10.1145/1321631.1321746"></d-cite>
-
-<!-- ([Sen, 2007](#references)).  -->
+Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code [[Sen, 2007]](#2).
 
 As defined above, concolic testing can be divided into two subprocesses:
 
@@ -117,7 +117,7 @@ SMT solvers such as [[yices]](#3) and [[z3]](#4) are used in the symbolic execut
     <figcaption>Figure 2. Concolic testing</figcaption>
 </figure> -->
 
-<a id="fig2">{% include figure.liquid loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 2. Concolic testing" %}</a>
+<a id="fig2"></a>{% include figure.liquid loading="eager" path="assets/img/Concolic+Testing+Approach.jpg" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 2. Concolic testing" %}
 
 Koushik Sen's example of concolic testing is depicted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
 
@@ -344,7 +344,7 @@ The DFS-based approach can be divided into three key stages:
 
     [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
     
-    <a id="fig3">{% include figure.liquid loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}</a>
+    <a id="fig3"></a>{% include figure.liquid loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
 
     The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs the SMT solver.
 
@@ -672,14 +672,14 @@ Provided below is a simple example on how z3 solver can be used to attain inputs
 
 Through this tutorial we have learnt how to parse C code using pycparser, convert the conditions to Z3 compatible format and solve them using Z3 solver. Now we can implement the DFS algorithm and explore more functionalities that pycparser and Z3 have to offer. Thank you for reading!
 
-<!-- ### References
+### References
 <a id="1">[1]</a> 
 https://www.initialyze.com/insights/unit-testing
 
 <a id="2">[2]</a>
 Koushik Sen. 2007. Concolic testing. In Proceedings of the 22nd IEEE/ACM International Conference on Automated Software Engineering (ASE '07). Association for Computing Machinery, New York, NY, USA, 571–572. https://doi.org/10.1145/1321631.1321746 -->
 
-<!-- <a id="3">[3]</a>
+<a id="3">[3]</a>
 https://yices.csl.sri.com
 
 <a id="4">[4]</a>
@@ -692,6 +692,4 @@ https://www.cs.cmu.edu/~aldrich/courses/17-355-17sp/notes/lec-concolic-sen.pdf
 Patrice Godefroid, Nils Klarlund, and Koushik Sen. 2005. DART: directed automated random testing. SIGPLAN Not. 40, 6 (June 2005), 213–223. https://doi.org/10.1145/1064978.1065036
 
 <a id="7">[7]</a>
-Burnim, Jacob, and Koushik Sen. "Heuristics for scalable dynamic test generation." 2008 23rd IEEE/ACM International Conference on Automated Software Engineering. IEEE, 2008 -->
-
-<d-appendix> </d-appendix>
+Burnim, Jacob, and Koushik Sen. "Heuristics for scalable dynamic test generation." 2008 23rd IEEE/ACM International Conference on Automated Software Engineering. IEEE, 2008
