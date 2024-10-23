@@ -673,23 +673,24 @@ Provided below is a simple example on how z3 solver can be used to attain inputs
 Through this tutorial we have learnt how to parse C code using pycparser, convert the conditions to Z3 compatible format and solve them using Z3 solver. Now we can implement the DFS algorithm and explore more functionalities that pycparser and Z3 have to offer. Thank you for reading!
 
 ### References
-<a id="1">[1]</a> 
+
+<a id="1">**1.** </a> 
 https://www.initialyze.com/insights/unit-testing
 
-<a id="2">[2]</a>
+<a id="2">**2.**</a>
 Koushik Sen. 2007. Concolic testing. In Proceedings of the 22nd IEEE/ACM International Conference on Automated Software Engineering (ASE '07). Association for Computing Machinery, New York, NY, USA, 571–572. https://doi.org/10.1145/1321631.1321746 -->
 
-<a id="3">[3]</a>
+<a id="3">**3.**</a>
 https://yices.csl.sri.com
 
-<a id="4">[4]</a>
+<a id="4">**4.**</a>
 https://microsoft.github.io/z3guide/docs/logic/intro/
 
-<a id="5">[5]</a>
+<a id="5">**5.**</a>
 https://www.cs.cmu.edu/~aldrich/courses/17-355-17sp/notes/lec-concolic-sen.pdf
 
-<a id="6">[6]</a>
+<a id="6">**6.**</a>
 Patrice Godefroid, Nils Klarlund, and Koushik Sen. 2005. DART: directed automated random testing. SIGPLAN Not. 40, 6 (June 2005), 213–223. https://doi.org/10.1145/1064978.1065036
 
-<a id="7">[7]</a>
+<a id="7">**7.**</a>
 Burnim, Jacob, and Koushik Sen. "Heuristics for scalable dynamic test generation." 2008 23rd IEEE/ACM International Conference on Automated Software Engineering. IEEE, 2008
