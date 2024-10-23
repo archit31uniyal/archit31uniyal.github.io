@@ -99,8 +99,7 @@ Randomized testing leads to generation of similar data and increases time requir
 
 ### Concolic Testing
 
-Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code [[Sen, 2007]](#2).
-<d-cite key="10.1145/1321631.1321746"></d-cite>.
+Concolic testing can be defined as automation of test input generation process by using the concrete and symbolic, also known as concolic, execution of the code [[Sen, 2007]](#2). <d-cite key="10.1145/1321631.1321746"></d-cite>
 
 <!-- ([Sen, 2007](#references)).  -->
 
@@ -673,12 +672,12 @@ Provided below is a simple example on how z3 solver can be used to attain inputs
 
 Through this tutorial we have learnt how to parse C code using pycparser, convert the conditions to Z3 compatible format and solve them using Z3 solver. Now we can implement the DFS algorithm and explore more functionalities that pycparser and Z3 have to offer. Thank you for reading!
 
-### References
+<!-- ### References
 <a id="1">[1]</a> 
 https://www.initialyze.com/insights/unit-testing
 
 <a id="2">[2]</a>
-Koushik Sen. 2007. Concolic testing. In Proceedings of the 22nd IEEE/ACM International Conference on Automated Software Engineering (ASE '07). Association for Computing Machinery, New York, NY, USA, 571–572. https://doi.org/10.1145/1321631.1321746
+Koushik Sen. 2007. Concolic testing. In Proceedings of the 22nd IEEE/ACM International Conference on Automated Software Engineering (ASE '07). Association for Computing Machinery, New York, NY, USA, 571–572. https://doi.org/10.1145/1321631.1321746 -->
 
 <!-- <a id="3">[3]</a>
 https://yices.csl.sri.com
@@ -695,4 +694,4 @@ Patrice Godefroid, Nils Klarlund, and Koushik Sen. 2005. DART: directed automate
 <a id="7">[7]</a>
 Burnim, Jacob, and Koushik Sen. "Heuristics for scalable dynamic test generation." 2008 23rd IEEE/ACM International Conference on Automated Software Engineering. IEEE, 2008 -->
 
-<d-appendix></d-appendix>
+<d-appendix> </d-appendix>
