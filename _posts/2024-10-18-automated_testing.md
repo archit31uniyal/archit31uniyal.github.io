@@ -91,7 +91,7 @@ int execute(int a, int b){
 }
 {% endhighlight %}
 
-For the example, above the algorithm would fetch the arguments for function using its abstract syntax tree (AST). Here since both arguments are integers, therefore the random values for _a_ and _b_ would be generated within the range \[-2<sup>32</sup>, 2<sup>32</sup>\). The GOAL condition would be achieved for all _a>20_ and _b<15_.
+For the example above, the algorithm would fetch the arguments for the function using its abstract syntax tree (AST). Since both arguments in the example are integers, therefore the random values for _a_ and _b_ would be generated within the range \[-2<sup>32</sup>, 2<sup>32</sup>\). The GOAL condition would be achieved for all _a>20_ and _b<15_.
 
 Randomized testing leads to generation of similar data and increases time required to generate useful unit tests. An alternative to randomized testing is concolic testing which has shown to be more effective in generating unit tests. Recently, large language models (LLM) have also been utilized to efficiently generate unit tests.
 
@@ -121,7 +121,7 @@ SMT solvers such as [[yices]](#3) and [[z3]](#4) are used in the symbolic execut
 Koushik Sen's example of concolic testing is depicted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
 
 As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $$ x=x_0, y=y_0 $$ and $$ z=2*y $$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
-$$(2*y_0 == x_0) \land (x_0 > y_0 + 10)$$
+\[(2*y_0 == x_0) \land (x_0 > y_0 + 10)\]
 
 In order to solve the constraint above, an SMT solver can be used which would return values for $$x_0$$ and $$y_0$$ which would satisfy the constraint.
 
@@ -174,7 +174,7 @@ function DART(program, initial_input): # Initialize with initial random input
     return explored_paths
 {% endhighlight %}
 
-The function DART(...) highlights the core of the algorithm. The algorithm takes random inputs along with the program as arguments, which are later used to generate the execution trace and the path constraints encountered. The execution trace is stored to keep tracks of paths covered. The path constraints are then traveresed to explore different branches in the program by negating each path constraint one at a time. The new path constraints are solved using an SMT solver. If the conditions are satisfied, record the new inputs and new constraints. Lastly, after each condition has been traversed, return the explored paths which can be used calculate the code coverage. The paper can be found [here](https://dl.acm.org/doi/10.1145/1064978.1065036).
+The function DART(...) highlights the core of the algorithm. The algorithm takes random inputs along with the program as arguments, which are later used to generate the execution trace and the path constraints encountered. The execution trace is stored to keep tracks of paths covered. The path constraints are then traveresed to explore different branches in the program by negating each path constraint one at a time. The new path constraints are solved using an SMT solver. If the conditions are satisfied, the new inputs and new constraints are recorded. Lastly, after each condition has been traversed, the explored paths are returned which can be used calculate the code coverage. The paper can be found [here](https://dl.acm.org/doi/10.1145/1064978.1065036).
 
 ##### CREST - Concolic test generation tool for C
 
@@ -343,14 +343,9 @@ The DFS-based approach can be divided into three key stages:
 
     [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
     
-    {% include figure.liquid id="fig3" loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
-    
-    <!-- <figure align="center" id="fig3">
-       <img src="assets/img/BST.png" width=400 alt="Concolic testing">
-       <figcaption>Figure 3. Binary tree for execute(...)</figcaption>
-   </figure> -->
+        {% include figure.liquid id="fig3" loading="eager" path="assets/img/BST.png" class="img-fluid rounded z-depth-1" width=auto alt="Concolic testing" caption="Figure 3. Binary tree for execute(...)" %}
 
-    The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs which help explore different paths using the SMT solver.
+    The reason for substituting the variables in terms of the arguments is to explore different uncovered paths and generate inputs the SMT solver.
 
 - **DFS traversal**
 
