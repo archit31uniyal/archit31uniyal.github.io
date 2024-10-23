@@ -341,7 +341,7 @@ The DFS-based approach can be divided into three key stages:
     }
     ```
 
-    $$Figure 3$$ below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
+    [Figure 3](#fig3) below shows how the binary tree generated for the function _execute_ will look. In this binary tree _c_ will be replaced with '$$a+b$$', which will convert the conditionals to '$$a+b<20$$' and '$$a+b<500$$'.
     
     <figure align="center" id="fig3">
        <img src="../assets/img/BST.png" width=400 alt="Concolic testing">
@@ -679,15 +679,21 @@ Through this tutorial we have learnt how to parse C code using pycparser, conver
 ### References
 <a id="1">[1]</a> 
 https://www.initialyze.com/insights/unit-testing
+
 <a id="2">[2]</a>
 Koushik Sen. 2007. Concolic testing. In Proceedings of the 22nd IEEE/ACM International Conference on Automated Software Engineering (ASE '07). Association for Computing Machinery, New York, NY, USA, 571–572. https://doi.org/10.1145/1321631.1321746
+
 <a id="3">[3]</a>
 https://yices.csl.sri.com
+
 <a id="4">[4]</a>
 https://microsoft.github.io/z3guide/docs/logic/intro/
+
 <a id="5">[5]</a>
 https://www.cs.cmu.edu/~aldrich/courses/17-355-17sp/notes/lec-concolic-sen.pdf
+
 <a id="6">[6]</a>
 Patrice Godefroid, Nils Klarlund, and Koushik Sen. 2005. DART: directed automated random testing. SIGPLAN Not. 40, 6 (June 2005), 213–223. https://doi.org/10.1145/1064978.1065036
+
 <a id="7">[7]</a>
 Burnim, Jacob, and Koushik Sen. "Heuristics for scalable dynamic test generation." 2008 23rd IEEE/ACM International Conference on Automated Software Engineering. IEEE, 2008
