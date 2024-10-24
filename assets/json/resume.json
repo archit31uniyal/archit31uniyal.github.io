@@ -29,12 +29,27 @@
   ],
   "work": [
     {
+      "name": "OmniVision Technologies, Santa Clara, CA",
+      "position": "Software Developer Intern",
+      "url": "https://www.ovt.com",
+      "startDate": "May 2024",
+      "endDate": "Aug 2024",
+      "summary":"",
+      "highlights": ["Deployed and debugged using GDB industry-standard automated testing methods like Crest and KLEE for C and C++ codebase", 
+      "Migrated these methods to Python, reducing software dependencies which come along with C++",
+      "Developed a novel instrument-free method for automated unit test generation which reduced processing time by 10 times and is currently being used by the algorithm team internally"]
+    },
+    {
       "name": "Oracle Labs, USA",
       "position": "Research Intern",
       "url": "https://labs.oracle.com/pls/apex/r/labs/labs/intro",
       "startDate": "May 2023",
       "endDate": "Aug 2023",
-      "summary": "Research on privacy in LLMs"
+      "summary": "",
+      "highlights": ["Lead research in the privacy group focusing on prevention of training data leaks in large language models (LLMs)",
+      "Fine-tuned LLMs using HuggingFace DeepSpeed and techniques such as LoRA in Pytorch",
+      "Patented a new concept of entity-relationship privacy in LLMs which targets a more realistic definition of privacy at the entity-level instead of measuring verbatim training data outputs"
+    ]
     },
     {
       "name": "Samsung Research Institute, Noida, India",
@@ -44,8 +59,8 @@
       "endDate": "June 2022",
       "summary": "",
       "highlights": [
-        "Worked on generative models like GANs for image enhancement.",
-        "Worked on improving and automating the cycling detection algorithm in Samsung galaxy watches"
+        "Lead research on improving the existing time series-based human activity recognition algorithms in Galaxy watch8 and contributed 10K lines of code to the codebase",
+        "Fine-tuned generative adversarial networks in Pytorch and reduced noise in the videos by 5 times compared to traditional denoising filters in Samsung smartphones"
       ]
     },
     {
