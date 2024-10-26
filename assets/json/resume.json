@@ -59,7 +59,7 @@
       "endDate": "June 2022",
       "summary": "",
       "highlights": [
-        "Lead research on improving the existing time series-based human activity recognition algorithms in Galaxy watch8 and contributed 10K lines of code to the codebase",
+        "Lead research on improving the existing time series-based human activity recognition algorithms in Galaxy watch5 and contributed 10K lines of code to the codebase",
         "Fine-tuned generative adversarial networks in Pytorch and reduced noise in the videos by 5 times compared to traditional denoising filters in Samsung smartphones"
       ]
     },
