@@ -2,7 +2,7 @@
 layout: default
 title: Automated Unit testing
 date: 2024-10-18
-description: Internship work at OmniVision Technologies
+description:
 tags: automated testing
 featured: false
 
@@ -40,7 +40,7 @@ toc:
     sidebar: 'left'
 ---
 
-In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code. We will also be discussing the approach I developed during my internship at OmniVision Technologies.
+In this blog, we will be discussing automated unit testing, various techniques used in the industry and python packages essential for parsing C code. We will also be discussing the approach I developed which utilizes an intrumentation-free depth first search approach to generate unit tests.
 
 ### What is unit testing?
 
@@ -79,7 +79,7 @@ def testAbs(n: int):
         assert(result >= 0)
 {% endhighlight %}
 
-A naive randomized unit test generation technique which I explored during my internship included extracting the arguments and their datatypes. The datatype of each argument was used to set a range of values from which a random value would be generated for the corresponding argument.
+A naive randomized unit test generation technique which I explored included extracting the arguments and their datatypes. The datatype of each argument was used to set a range of values from which a random value would be generated for the corresponding argument.
 
 Provided below is an example of a target function
 
@@ -122,13 +122,15 @@ SMT solvers such as [[yices]](#3) and [[z3]](#4) are used in the symbolic execut
 Koushik Sen's example of concolic testing is depicted in [Figure 2](#fig2). It shows how for a given target code the concrete and symbolic execution is performed.
 
 As it can be seen, in order to reach the ERROR statement, variables x, y and z were encountered and their symbolic representations were also recorded which were $$ x=x_0, y=y_0 $$ and $$ z=2*y $$. Additionally, the conditions encountered during the concrete execution were also collected. In order to reach the ERROR statement, both the path conditions must satisfy, hence a symbolic constraint is generated
-\[(2*y_0 == x_0) \land (x_0 > y_0 + 10)\]
+$$
+(2*y_0 == x_0) \land (x_0 > y_0 + 10)
+$$
 
 In order to solve the constraint above, an SMT solver can be used which would return values for $$x_0$$ and $$y_0$$ which would satisfy the constraint.
 
 #### Background
 
-In this section, I will be discussing two concolic testing techniques which I studied and implemented as part of my internship. These two algorithm have been adopted by the community and prior work has been done to make these approaches more efficient.
+In this section, I will be discussing two concolic testing techniques which I studied and implemented. These two algorithm have been adopted by the community and prior work has been done to make these approaches more efficient.
 
 ##### Direct Automated Random Testing (DART)
 
@@ -315,7 +317,7 @@ Originally, crest was implemented with Yices SMT solver which does not support n
 
 ### Depth First Search (DFS) Approach
 
-In this section, we will discussing the DFS based approach I developed during my internship at OmniVision. The key feature of this approach is that it does not require instrumentation and uses the SMT solvers ability to solve symbolic expressions to generate efficient unit test inputs. Furthermore, this approach was implemented in Python which required the dependencies of the software significantly.
+In this section, we will discussing the intrumentation-free DFS based approach I developed. The key feature of this approach is that it does not require instrumentation and uses the SMT solvers ability to solve symbolic expressions to generate efficient unit test inputs. Furthermore, this approach was implemented in Python which required the dependencies of the software significantly.
 
 **Instrumentation:** It is a process of modifying software such that analysis can be performed on it. It allows logging the state of variables during test runs, which is an advantage during software testing. DART and Crest use instrumentation to update and monitor the state of the target inputs.
 
@@ -397,7 +399,7 @@ The reason for substituting the variables in terms of the arguments is to explor
 
 This approach was tested on Heechul's test suite which can be found [here](https://github.com/heechul/crest-z3/tree/master/test). The development of the DFS approach is still in its native stage and requires improvement on including various functionalities such as loops and in-built function calls.
 
-During my internship, I was able to implement the following functionalities:
+I was able to implement the following functionalities:
 
 - Support for non-linear arithmetic
 - Support for array operations
